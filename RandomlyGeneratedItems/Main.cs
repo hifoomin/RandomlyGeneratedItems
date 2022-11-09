@@ -2,8 +2,10 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using R2API;
+using R2API.ContentManagement;
 using R2API.Utils;
 using RoR2;
+using RoR2.ContentManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +33,15 @@ namespace RandomlyGeneratedItems
         private static ItemDef itemDef;
         private static System.Random statValueRng;
 
+        private static GameObject model;
+        private static Sprite icon;
+
+        private static System.Random modelRng;
+
+        private static System.Random iconRng;
+        private static int modelRng2;
+
+        private static int iconRng2;
         // yeah i know im using system.random, placeholder for now
         // still dont know how im gonna network this, maybe not ever lol
 
@@ -73,9 +84,9 @@ namespace RandomlyGeneratedItems
 
             "Annoying", "Awful", "Bloody", "Clean", "Combative", "Courageous", "Cute", "Adorable", "Dead", "Distinct", "Green", "Yellow", "Pink", "Monochromatic",
             "Charming", "Dangerous", "Drab", "Alive", "Bright", "Dark", "Evil", "Enchanting", "Fragile", "Jittery", "Mysterious", "Modern", "Perfect",
-            "Plain", "Real", "Fake", "Tender", "Unusual",
+            "Plain", "Real", "Fake", "Tender", "Unusual", "Imaginary",
 
-            "Femboy"
+            "Femboy" // for the funny
         };
 
         private static List<string> itemName = new()
@@ -115,8 +126,13 @@ namespace RandomlyGeneratedItems
             "Lightning", "Barrage", "Claw", "Snap", "Driver", "Rebound", "Streamline", "Beam", "Blizzard", "Bullseye", "Melter", "Sunder", "Surge", "Hyperbeam",
             "Hologram", "Recursion",
 
-            "Load"
+            "Load" // for the funny
         };
+
+        private static List<GameObject> itemModels = new();
+        private static List<Sprite> itemIcons = new();
+
+        private static List<ItemDef> myItemDefs = new();
 
         public void Awake()
         {
@@ -129,6 +145,8 @@ namespace RandomlyGeneratedItems
 
             int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
 
+            On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
+
             for (int i = 0; i < maxItems; i++)
             {
                 GenerateItem();
@@ -136,6 +154,27 @@ namespace RandomlyGeneratedItems
                 {
                     Logger.LogWarning("Max item amount of " + maxItems + " reached");
                 }
+            }
+        }
+
+        private void ItemCatalog_Init(On.RoR2.ItemCatalog.orig_Init orig)
+        {
+            orig();
+            foreach (ItemDef def in ItemCatalog.allItemDefs)
+            {
+                if (def.pickupModelPrefab != null) itemModels.Add(Instantiate(def.pickupModelPrefab));
+                if (def.pickupIconSprite != null) itemIcons.Add(Instantiate(def.pickupIconSprite));
+            }
+
+            modelRng2 = modelRng.Next(itemModels.Count);
+            iconRng2 = iconRng.Next(itemIcons.Count);
+
+            foreach (ItemDef itemDef in myItemDefs)
+            {
+                itemDef.pickupModelPrefab = itemModels[modelRng2];
+                itemModels.RemoveAt(modelRng2);
+                itemDef.pickupIconSprite = itemIcons[iconRng2];
+                itemIcons.RemoveAt(iconRng2);
             }
         }
 
@@ -150,8 +189,9 @@ namespace RandomlyGeneratedItems
             string itemPickup = "Gain ";
             string itemDesc = "Gain ";
             ItemTier tier;
-            GameObject model;
-            Sprite icon;
+
+            //System.Random modelRng = new();
+            //System.Random iconRng = new();
 
             // load a random prefab through addressables and assign it to model?
             // load a random sprite through addressables and assign it to icon?
@@ -211,6 +251,7 @@ namespace RandomlyGeneratedItems
             LanguageAPI.Add(itemDef.descriptionToken, itemDesc);
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
+            myItemDefs.Add(itemDef);
             Logger.LogWarning("Generated a " + translatedTier + " item named " + itemName);
 
             //On.RoR2.Language.GetLocalizedStringByToken += Language_GetLocalizedStringByToken;
