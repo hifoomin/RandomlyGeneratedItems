@@ -1,13 +1,14 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Mono.Cecil;
 using R2API;
-using R2API.ContentManagement;
 using R2API.Utils;
 using RoR2;
 using RoR2.ContentManagement;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RandomlyGeneratedItems
 {
@@ -39,9 +40,11 @@ namespace RandomlyGeneratedItems
         private static System.Random modelRng;
 
         private static System.Random iconRng;
-        private static int modelRng2;
 
-        private static int iconRng2;
+        private static System.Random rRng = new();
+        private static System.Random gRng = new();
+        private static System.Random bRng = new();
+        private static System.Random aRng = new();
         // yeah i know im using system.random, placeholder for now
         // still dont know how im gonna network this, maybe not ever lol
 
@@ -160,21 +163,53 @@ namespace RandomlyGeneratedItems
         private void ItemCatalog_Init(On.RoR2.ItemCatalog.orig_Init orig)
         {
             orig();
-            foreach (ItemDef def in ItemCatalog.allItemDefs)
+
+            foreach (ItemDef def in ContentManager._itemDefs)
             {
-                if (def.pickupModelPrefab != null) itemModels.Add(Instantiate(def.pickupModelPrefab));
-                if (def.pickupIconSprite != null) itemIcons.Add(Instantiate(def.pickupIconSprite));
+                if (def.pickupModelPrefab) itemModels.Add(def.pickupModelPrefab);
+                if (def.pickupIconSprite) itemIcons.Add(def.pickupIconSprite);
             }
 
-            modelRng2 = modelRng.Next(itemModels.Count);
-            iconRng2 = iconRng.Next(itemIcons.Count);
+            foreach (BuffDef def in ContentManager._buffDefs)
+            {
+                if (def.iconSprite)
+                {
+                    var clone = Instantiate(def);
+                    clone.buffColor = new Color32((byte)rRng.Next(0, 255), (byte)gRng.Next(0, 255), (byte)bRng.Next(0, 255), (byte)aRng.Next(150, 255));
+                    itemIcons.Add(clone.iconSprite);
+                }
+            }
+
+            foreach (EquipmentDef def in ContentManager._equipmentDefs)
+            {
+                if (def.pickupModelPrefab) itemModels.Add(def.pickupModelPrefab);
+                if (def.pickupIconSprite) itemIcons.Add(def.pickupIconSprite);
+            }
+
+            Logger.LogFatal("modelList has " + itemModels.Count + " elements");
+            Logger.LogFatal("iconList has " + itemIcons.Count + " elements");
+            var modelRng2 = modelRng.Next(itemModels.Count);
+            var iconRng2 = iconRng.Next(itemIcons.Count);
 
             foreach (ItemDef itemDef in myItemDefs)
             {
-                itemDef.pickupModelPrefab = itemModels[modelRng2];
-                itemModels.RemoveAt(modelRng2);
-                itemDef.pickupIconSprite = itemIcons[iconRng2];
-                itemIcons.RemoveAt(iconRng2);
+                // itemDef.pickupModelPrefab = itemModels[modelRng2];
+                // itemModels.RemoveAt(modelRng2);
+                // not actually sure why it NREs,
+                // also not enough elements to have unique models for everything
+                Logger.LogFatal("itemdef is " + itemDef);
+                if (itemIcons.Count > 0)
+                {
+                    // itemDef.pickupIconSprite = itemIcons[iconRng2];
+                    // NRE HERE SOMEHOW?? AT ITEMDEF???????????
+                    /*
+                        IL_023D: ldloc.s   itemDef <<< HERE???
+                        IL_023F: ldsfld    class [netstandard] System.Collections.Generic.List`1<class [UnityEngine.CoreModule] UnityEngine.Sprite> RandomlyGeneratedItems.Main::itemIcons
+                        IL_0244: ldloc.1
+                        IL_0245: callvirt instance !0 class [netstandard] System.Collections.Generic.List`1<class [UnityEngine.CoreModule]
+                    */
+                    // itemIcons.RemoveAt(iconRng2);
+                }
             }
         }
 
@@ -200,6 +235,8 @@ namespace RandomlyGeneratedItems
             System.Random nameRng = new();
             System.Random tierRng = new();
             statValueRng = new();
+            modelRng = new();
+            iconRng = new();
 
             var prefixRng2 = prefixRng.Next(itemNamePrefix.Count);
             var nameRng2 = nameRng.Next(Main.itemName.Count);
