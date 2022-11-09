@@ -14,7 +14,7 @@ namespace RandomlyGeneratedItems
 {
     [BepInDependency(R2API.R2API.PluginGUID)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-    [R2APISubmoduleDependency(nameof(LanguageAPI))]
+    [R2APISubmoduleDependency(nameof(LanguageAPI), nameof(ItemAPI))]
     public class Main : BaseUnityPlugin
     {
         public const string PluginGUID = PluginAuthor + "." + PluginName;
@@ -182,33 +182,42 @@ namespace RandomlyGeneratedItems
 
             foreach (EquipmentDef def in ContentManager._equipmentDefs)
             {
-                if (def.pickupModelPrefab) itemModels.Add(def.pickupModelPrefab);
-                if (def.pickupIconSprite) itemIcons.Add(def.pickupIconSprite);
+                if (def.pickupModelPrefab)
+                {
+                    itemModels.Add(def.pickupModelPrefab);
+                    itemModels.Add(def.pickupModelPrefab);
+                    itemModels.Add(def.pickupModelPrefab);
+                }
+
+                if (def.pickupIconSprite)
+                {
+                    itemIcons.Add(def.pickupIconSprite);
+                    itemIcons.Add(def.pickupIconSprite);
+                }
             }
 
             Logger.LogFatal("modelList has " + itemModels.Count + " elements");
             Logger.LogFatal("iconList has " + itemIcons.Count + " elements");
-            var modelRng2 = modelRng.Next(itemModels.Count);
-            var iconRng2 = iconRng.Next(itemIcons.Count);
 
             foreach (ItemDef itemDef in myItemDefs)
             {
-                // itemDef.pickupModelPrefab = itemModels[modelRng2];
-                // itemModels.RemoveAt(modelRng2);
-                // not actually sure why it NREs,
-                // also not enough elements to have unique models for everything
-                Logger.LogFatal("itemdef is " + itemDef);
+                var modelRng2 = modelRng.Next(itemModels.Count);
+                var iconRng2 = iconRng.Next(itemIcons.Count);
+                /*
+                if (itemModels.Count > 0)
+                {
+                    itemDef.pickupModelPrefab = itemModels[modelRng2];
+                    itemModels.RemoveAt(modelRng2);
+
+                    Logger.LogFatal("itemmodels[modelRng2] is " + itemModels[modelRng2]);
+                    itemModels.RemoveAt(modelRng2);
+                }
+                */
                 if (itemIcons.Count > 0)
                 {
-                    // itemDef.pickupIconSprite = itemIcons[iconRng2];
-                    // NRE HERE SOMEHOW?? AT ITEMDEF???????????
-                    /*
-                        IL_023D: ldloc.s   itemDef <<< HERE???
-                        IL_023F: ldsfld    class [netstandard] System.Collections.Generic.List`1<class [UnityEngine.CoreModule] UnityEngine.Sprite> RandomlyGeneratedItems.Main::itemIcons
-                        IL_0244: ldloc.1
-                        IL_0245: callvirt instance !0 class [netstandard] System.Collections.Generic.List`1<class [UnityEngine.CoreModule]
-                    */
-                    // itemIcons.RemoveAt(iconRng2);
+                    itemDef.pickupIconSprite = itemIcons[iconRng2];
+                    Logger.LogWarning("itemicons[iconRng2] is " + itemIcons[iconRng2]);
+                    itemIcons.RemoveAt(iconRng2);
                 }
             }
         }
