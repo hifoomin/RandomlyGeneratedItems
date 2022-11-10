@@ -30,7 +30,6 @@ namespace RandomlyGeneratedItems
         public static Xoroshiro128Plus rng;
 
         private static ItemDef itemDef;
-        private static System.Random statValueRng;
 
         private static GameObject model;
         private static Sprite icon;
@@ -50,6 +49,8 @@ namespace RandomlyGeneratedItems
         private static List<ItemDef> myItemDefs = new();
         private static Dictionary<string, Effect> map = new();
 
+        // gonna make the statMult and tierMult configurable later down the line
+
         public void Awake()
         {
             RGILogger = Logger;
@@ -60,7 +61,7 @@ namespace RandomlyGeneratedItems
             Logger.LogFatal("seed is " + seed);
 
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
-            int maxItems = Config.Bind<int>("Configuration:", "Maximum Items", 350, "the maximum amount of items the mod will generate").Value;
+            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "the maximum amount of items the mod will generate").Value;
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
@@ -77,22 +78,27 @@ namespace RandomlyGeneratedItems
 
             On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
 
-            On.RoR2.CharacterBody.Update += (orig, self) => {
+            On.RoR2.CharacterBody.Update += (orig, self) =>
+            {
                 orig(self);
-                if (UnityEngine.Networking.NetworkServer.active) {
-                    if (self.characterMotor && self.characterMotor.velocity.magnitude != -self.characterMotor.lastVelocity.magnitude) {
-                        if (self.isPlayerControlled) {
+                if (UnityEngine.Networking.NetworkServer.active)
+                {
+                    if (self.characterMotor && self.characterMotor.velocity.magnitude != -self.characterMotor.lastVelocity.magnitude)
+                    {
+                        if (self.isPlayerControlled)
+                        {
                             self.RecalculateStats();
+                            // :thonk:
+                            // you know forcing recalcstats is terrible for the trout population
                         }
                     }
                 }
-            }; 
+            };
         }
 
         private void ItemCatalog_Init(On.RoR2.ItemCatalog.orig_Init orig)
         {
             orig();
-
             /* foreach (ItemDef def in ContentManager._itemDefs)
             {
                 if (def.pickupModelPrefab) itemModels.Add(def.pickupModelPrefab);
@@ -122,7 +128,7 @@ namespace RandomlyGeneratedItems
                     itemIcons.Add(def.pickupIconSprite);
                     itemIcons.Add(def.pickupIconSprite);
                 }
-            } 
+            }
 
             Logger.LogFatal("modelList has " + itemModels.Count + " elements");
             Logger.LogFatal("iconList has " + itemIcons.Count + " elements");
@@ -131,23 +137,23 @@ namespace RandomlyGeneratedItems
             {
                 var modelRng2 = modelRng.Next(itemModels.Count);
                 var iconRng2 = iconRng.Next(itemIcons.Count); */
-                /*
-                if (itemModels.Count > 0)
-                {
-                    itemDef.pickupModelPrefab = itemModels[modelRng2];
-                    itemModels.RemoveAt(modelRng2);
+            /*
+            if (itemModels.Count > 0)
+            {
+                itemDef.pickupModelPrefab = itemModels[modelRng2];
+                itemModels.RemoveAt(modelRng2);
 
-                    Logger.LogFatal("itemmodels[modelRng2] is " + itemModels[modelRng2]);
-                    itemModels.RemoveAt(modelRng2);
-                }
-                */
-                /* if (itemIcons.Count > 0)
-                {
-                    itemDef.pickupIconSprite = itemIcons[iconRng2];
-                    Logger.LogWarning("itemicons[iconRng2] is " + itemIcons[iconRng2]);
-                    itemIcons.RemoveAt(iconRng2);
-                } 
-            } */
+                Logger.LogFatal("itemmodels[modelRng2] is " + itemModels[modelRng2]);
+                itemModels.RemoveAt(modelRng2);
+            }
+            */
+            /* if (itemIcons.Count > 0)
+            {
+                itemDef.pickupIconSprite = itemIcons[iconRng2];
+                Logger.LogWarning("itemicons[iconRng2] is " + itemIcons[iconRng2]);
+                itemIcons.RemoveAt(iconRng2);
+            }
+        } */
         }
 
         private ItemDisplayRuleDict CreateItemDisplayRules()
@@ -158,20 +164,11 @@ namespace RandomlyGeneratedItems
         private void GenerateItem()
         {
             string itemName = "";
-            string itemPickup = "Gain ";
-            string itemDesc = "Gain ";
             ItemTier tier;
-
-            //System.Random modelRng = new();
-            //System.Random iconRng = new();
-
-            // load a random prefab through addressables and assign it to model?
-            // load a random sprite through addressables and assign it to icon?
 
             System.Random prefixRng = new();
             System.Random nameRng = new();
             System.Random tierRng = new();
-            statValueRng = new();
             modelRng = new();
             iconRng = new();
 
@@ -179,7 +176,8 @@ namespace RandomlyGeneratedItems
 
             string xmlSafeItemName = "E";
 
-            while (attempts <= 5) {
+            while (attempts <= 5)
+            {
                 var prefixRng2 = prefixRng.Next(NameSystem.itemNamePrefix.Count);
                 var nameRng2 = nameRng.Next(NameSystem.itemName.Count);
                 itemName = "";
@@ -194,74 +192,56 @@ namespace RandomlyGeneratedItems
                 xmlSafeItemName = xmlSafeItemName.Replace(" ", "_").Replace("'", "").Replace("&", "AND");
 
                 Effect buffer;
-                if (map.TryGetValue("ITEM_" + xmlSafeItemName + "_NAME", out buffer)) {
+                if (map.TryGetValue("ITEM_" + xmlSafeItemName + "_NAME", out buffer))
+                {
                     attempts++;
                 }
-                else {
+                else
+                {
                     break;
                 }
             }
 
-            if (attempts > 5) {
+            if (attempts > 5)
+            {
                 return;
             }
 
             tier = (ItemTier)tierRng.Next(0, 3);
 
             string translatedTier = "";
-
-            switch (tier)
-            {
-                case (ItemTier)0:
-                    statValueRng.Next(8, 14);
-                    translatedTier = "Common";
-                    break;
-
-                case (ItemTier)1:
-                    statValueRng.Next(20, 35);
-                    translatedTier = "Uncommon";
-                    break;
-
-                case (ItemTier)2:
-                    statValueRng.Next(40, 60);
-                    translatedTier = "Legendary";
-                    break;
-            }
             float mult = 1f;
+            float stackMult = 1f;
             Effect effect = new();
-            switch (tier) {
-                case ItemTier.Tier2:
-                    mult = 1.5f;
-                    break;
-                case ItemTier.Tier3:
-                    mult = 2f;
-                    break;
-                default:
-                    mult = 1f;
-                    break;
-            }
-            effect.Generate(rng, mult);
 
-            int objects = rng.RangeInt(3, 9);
+            int objects = rng.RangeInt(2, 9);
             PrimitiveType[] prims = {
                 PrimitiveType.Sphere,
                 PrimitiveType.Capsule,
                 PrimitiveType.Cylinder,
                 PrimitiveType.Cube,
             };
-            Color[] colors = {
-                Color.cyan,
-                Color.grey,
-                Color.yellow,
-                Color.black,
-                Color.Lerp(Color.gray, Color.cyan, 5),
-                Color.Lerp(Color.red, Color.magenta, 2),
-                Color.Lerp(Color.white, Color.black, 7),
+            Color32[] colors =
+            {
+                // top colors from paint.net with S turned down by 20 and V turned down by 30
+                // black is 0, 0, 15 hsv            //
+                // white is 0, 0, 85 hsv           //
+                new(178, 35, 35, 255),            // red
+                new(178, 92, 35, 255),           // orange
+                new(178, 154, 35, 255),         // yellow
+                new(35, 178, 52, 255),         // green
+                new(35, 178, 178, 255),       // blue
+                new(35, 57, 178, 255),       // dark blue
+                new(73, 35, 178, 255),      // violet
+                new(133, 35, 178, 255),    // magenta
+                new(38, 38, 38, 255),     // black
+                new(216, 216, 216, 255), // white
             };
 
             GameObject first = GameObject.CreatePrimitive(prims[rng.RangeInt(0, prims.Length)]);
             first.GetComponent<MeshRenderer>().material.color = colors[rng.RangeInt(0, colors.Length)];
-            for (int i = 0; i < objects; i++) {
+            for (int i = 0; i < objects; i++)
+            {
                 GameObject prim = GameObject.CreatePrimitive(prims[rng.RangeInt(0, prims.Length)]);
                 prim.GetComponent<MeshRenderer>().material.color = colors[rng.RangeInt(0, colors.Length)];
                 prim.transform.SetParent(first.transform);
@@ -269,8 +249,8 @@ namespace RandomlyGeneratedItems
                 prim.transform.localRotation = Quaternion.Euler(new Vector3(rng.RangeFloat(-360, 360), rng.RangeFloat(-360, 360), rng.RangeFloat(-360, 360)));
             }
 
-            GameObject prefab = PrefabAPI.InstantiateClone(first, $"{xmlSafeItemName}-model");
-            GameObject.DontDestroyOnLoad(prefab);
+            GameObject prefab = PrefabAPI.InstantiateClone(first, $"{xmlSafeItemName}-model", false);
+            DontDestroyOnLoad(prefab);
 
             Texture2D tex = new(512, 512);
 
@@ -285,42 +265,80 @@ namespace RandomlyGeneratedItems
 
             Color color = colors[rng.RangeInt(0, colors.Length)];
             Color tierCol;
-            
-            switch (tier) {
+
+            switch (tier)
+            {
                 case ItemTier.Tier1:
                     tierCol = Color.white;
+                    translatedTier = "Common";
+                    mult = 1f;
+                    stackMult = 1f;
                     break;
+
                 case ItemTier.Tier2:
                     tierCol = Color.green;
+                    translatedTier = "Uncommon";
+                    mult = 1.7f;
+                    stackMult = 0.6f;
                     break;
+
                 case ItemTier.Tier3:
                     tierCol = Color.red;
+                    translatedTier = "Legendary";
+                    mult = 2.5f;
+                    stackMult = 0.3f;
                     break;
+
                 case ItemTier.Lunar:
                     tierCol = Color.blue;
+                    translatedTier = "Lunar";
+                    mult = 1.8f;
+                    stackMult = 0.5f;
                     break;
+
                 case ItemTier.VoidTier1:
                     tierCol = Color.magenta;
+                    translatedTier = "Void Common";
+                    mult = 0.9f;
+                    stackMult = 1f;
                     break;
+
                 case ItemTier.VoidTier2:
                     tierCol = Color.magenta;
+                    translatedTier = "Void Uncommon";
+                    mult = 1.5f;
+                    stackMult = 0.75f;
                     break;
+
                 case ItemTier.VoidTier3:
                     tierCol = Color.magenta;
+                    translatedTier = "Void Legendary";
+                    mult = 2f;
+                    stackMult = 0.45f;
                     break;
+
                 case ItemTier.VoidBoss:
                     tierCol = Color.magenta;
+                    translatedTier = "Void Yellow";
+                    mult = 2f;
+                    stackMult = 0.6f;
                     break;
+
                 default:
                     tierCol = Color.black;
+                    translatedTier = "BRO THIS SHOULDN'T BE HAPPENING";
+                    mult = 1f;
+                    stackMult = 1f;
                     break;
             }
+
+            effect.Generate(rng, mult, stackMult);
 
             while (y < tex.height)
             {
                 float x = 0.0F;
                 while (x < tex.width)
-                {  
+                {
                     float xCoord = sx + x / tex.width * scale;
                     float yCoord = sy + y / tex.height * scale;
                     float sample = Mathf.PerlinNoise(xCoord, yCoord);
@@ -332,10 +350,10 @@ namespace RandomlyGeneratedItems
 
             tex.SetPixels(col);
             tex.Apply();
-            
+
             Sprite icon = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-            GameObject.DontDestroyOnLoad(tex);
-            GameObject.DontDestroyOnLoad(icon);
+            DontDestroyOnLoad(tex);
+            DontDestroyOnLoad(icon);
 
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
             itemDef.name = "ITEM_" + xmlSafeItemName;
@@ -359,26 +377,14 @@ namespace RandomlyGeneratedItems
             Logger.LogWarning("Generated a " + translatedTier + " item named " + itemName);
 
             //On.RoR2.Language.GetLocalizedStringByToken += Language_GetLocalizedStringByToken;
-
-            // RoR2.UserProfile.defaultProfile.DiscoverPickup(itemDef.CreatePickupDef().pickupIndex);
-        }
-
-        private string Language_GetLocalizedStringByToken(On.RoR2.Language.orig_GetLocalizedStringByToken orig, Language self, string token)
-        {
-            if (token == "ITEM_" + NameSystem.itemName + "_PICKUP")
-            {
-            }
-            if (token == "ITEM_" + NameSystem.itemName + "_DESCRIPTION")
-            {
-            }
-            return orig(self, token);
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
         {
             if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
             {
-                foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder) {
+                foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                {
                     ItemDef def = ItemCatalog.GetItemDef(index);
                     Effect effect;
 
@@ -391,10 +397,10 @@ namespace RandomlyGeneratedItems
                     Debug.Log("Current Item: " + def.nameToken); */
 
                     bool found = map.TryGetValue(def.nameToken, out effect);
-                    if (found && effect.effectType == Effect.EffectType.Passive) {
-                        Debug.Log("effect was found for " + def.nameToken + " : " + effect.description);
-                        Debug.Log("conditions: " + effect.ConditionsMet(sender));
-                        if (effect.ConditionsMet(sender)) {
+                    if (found && effect.effectType == Effect.EffectType.Passive)
+                    {
+                        if (effect.ConditionsMet(sender))
+                        {
                             effect.statEffect(args, sender.inventory.GetItemCount(def), sender);
                         }
                     }
@@ -402,14 +408,17 @@ namespace RandomlyGeneratedItems
             }
         }
 
-        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo info, GameObject victim) {
+        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo info, GameObject victim)
+        {
             orig(self, info, victim);
-            if (UnityEngine.Networking.NetworkServer.active && info.attacker) {
+            if (UnityEngine.Networking.NetworkServer.active && info.attacker)
+            {
                 CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
 
                 if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && info.damageColorIndex != DamageColorIndex.Item)
                 {
-                    foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder) {
+                    foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                    {
                         ItemDef def = ItemCatalog.GetItemDef(index);
                         Effect effect;
 
@@ -422,15 +431,15 @@ namespace RandomlyGeneratedItems
                         Debug.Log("Current Item: " + def.nameToken); */
 
                         bool found = map.TryGetValue(def.nameToken, out effect);
-                        if (found && effect.effectType == Effect.EffectType.OnHit) {
-                            Debug.Log("effect was found for " + def.nameToken + " : " + effect.description);
-                            Debug.Log("conditions: " + effect.ConditionsMet(sender));
-                            if (effect.ConditionsMet(sender) && Util.CheckRoll(effect.chance, sender.master)) {
+                        if (found && effect.effectType == Effect.EffectType.OnHit)
+                        {
+                            if (effect.ConditionsMet(sender) && Util.CheckRoll(effect.chance, sender.master))
+                            {
                                 effect.onHitEffect(info);
                             }
                         }
                     }
-            }
+                }
             }
         }
     }
