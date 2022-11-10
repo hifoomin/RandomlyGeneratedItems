@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using RoR2;
 using R2API;
 using System.Collections.Generic;
@@ -63,6 +63,26 @@ namespace RandomlyGeneratedItems
         public GameObject fireballPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LemurianBruiser/LemurianBigFireball.prefab").WaitForCompletion(), "RandomFireball");
 
         #endregion PREFABS
+
+        // give additional multipliers when the item has a condition
+        // stack chance with on hit items
+        // actually fuckin make the stacking effectiveness work
+
+        // ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
+        // ░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
+        // ░░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█░░░
+        // ░░░█░░░░░░▄██▀▄▄░░░░░▄▄▄░░░░█░░
+        // ░▄▀▒▄▄▄▒░█▀▀▀▀▄▄█░░░██▄▄█░░░░█░
+        // █░▒█▒▄░▀▄▄▄▀░░░░░░░░█░░░▒▒▒▒▒░█
+        // █░▒█░█▀▄▄░░░░░█▀░░░░▀▄░░▄▀▀▀▄▒█
+        // ░█░▀▄░█▄░█▀▄▄░▀░▀▀░▄▄▀░░░░█░░█░
+        // ░░█░░░▀▄▀█▄▄░█▀▀▀▄▄▄▄▀▀█▀██░█░░
+        // ░░░█░░░░██░░▀█▄▄▄█▄▄█▄████░█░░░
+        // ░░░░█░░░░▀▀▄░█░░░█░█▀██████░█░░
+        // ░░░░░▀▄░░░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█░░
+        // ░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░▒░░░█░
+        // ░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░
+        // ░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░
 
         #region CHOSEN_PREFABS
 
@@ -378,7 +398,12 @@ namespace RandomlyGeneratedItems
                 damageBoost,
                 shieldBoost,
                 armorBoost,
-                regenBoost
+                regenBoost,
+                critBoost,
+                secondaryCdrBoost,
+                utilityCdrBoost,
+                specialCdrBoost,
+                allSkillCdrBoost
             };
 
             conditionCallbackList = new()

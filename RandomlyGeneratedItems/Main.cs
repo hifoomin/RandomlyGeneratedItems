@@ -49,6 +49,8 @@ namespace RandomlyGeneratedItems
         private static List<ItemDef> myItemDefs = new();
         private static Dictionary<string, Effect> map = new();
 
+        // gonna make the statMult and tierMult configurable later down the line
+
         public void Awake()
         {
             RGILogger = Logger;
@@ -59,7 +61,7 @@ namespace RandomlyGeneratedItems
             Logger.LogFatal("seed is " + seed);
 
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
-            int maxItems = Config.Bind("Configuration:", "Maximum Items", 100, "the maximum amount of items the mod will generate").Value;
+            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "the maximum amount of items the mod will generate").Value;
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
