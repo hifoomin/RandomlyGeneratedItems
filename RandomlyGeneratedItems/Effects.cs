@@ -95,9 +95,6 @@ namespace RandomlyGeneratedItems {
             stat1 = Mathf.Ceil(rng.RangeFloat(1f, 20f)) * mult;
             chance = Mathf.Ceil(rng.RangeFloat(1f, 100f));
             // staticChance = chance;
-
-            // generate maps
-            GenerateMapsAndCallbacks();
             
             string[] prefabs = { // TODO: this is partially broken - the projectile name doesnt exist for some reason
                 "<style=cIsDamage>Missile</style>", 
@@ -107,6 +104,10 @@ namespace RandomlyGeneratedItems {
             };
  
             projectileName = prefabs[rng.RangeInt(0, 4)];
+
+            // assign maps AFTER choosing projname or it will be empty!!!
+            GenerateMapsAndCallbacks();
+
             projNameMap.TryGetValue(projectileName, out chosenPrefab);
 
             effectType = (EffectType)rng.RangeInt(0, 2);
