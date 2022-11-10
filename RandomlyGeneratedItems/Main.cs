@@ -76,7 +76,14 @@ namespace RandomlyGeneratedItems
 
             RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += GlobalEventManager_OnHitEnemy;
+            On.RoR2.GlobalEventManager.ServerDamageDealt += GlobalEventManager_ServerDamageDealt;
+
+            On.RoR2.UI.MainMenu.BaseMainMenuScreen.Awake += (orig, self) => {
+                orig(self);
+                foreach (ItemDef def in myItemDefs) {
+                    RoR2.UserProfile.defaultProfile.DiscoverPickup(def.CreatePickupDef().pickupIndex);
+                }
+            };
 
             On.RoR2.CharacterBody.Update += (orig, self) =>
             {
@@ -93,6 +100,65 @@ namespace RandomlyGeneratedItems
                         }
                     }
                 }
+            };
+
+            On.RoR2.CharacterBody.OnSkillActivated += (orig, sender, slot) => {
+                orig(sender, slot);
+                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
+                {
+                    foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                    {
+                        ItemDef def = ItemCatalog.GetItemDef(index);
+                        Effect effect;
+
+                        /*foreach (KeyValuePair<string, Effect> res in map) {
+                            Debug.Log("Key: " + res.Key);
+                            Debug.Log("Description: " + res.Value.description);
+                            Debug.Log("=====================================");
+                        }
+
+                        Debug.Log("Current Item: " + def.nameToken); */
+
+                        bool found = map.TryGetValue(def.nameToken, out effect);
+                        if (found && effect.effectType == Effect.EffectType.OnSkillUse && Util.CheckRoll(effect.chance, sender.master))
+                        {
+                            if (effect.ConditionsMet(sender))
+                            {
+                                effect.onSkillUseEffect(sender, sender.inventory.GetItemCount(def));
+                            }
+                        }
+                    }
+                }
+            };
+
+            On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) => {
+                CharacterBody sender = self.body;
+                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
+                {
+                    foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                    {
+                        ItemDef def = ItemCatalog.GetItemDef(index);
+                        Effect effect;
+
+                        /*foreach (KeyValuePair<string, Effect> res in map) {
+                            Debug.Log("Key: " + res.Key);
+                            Debug.Log("Description: " + res.Value.description);
+                            Debug.Log("=====================================");
+                        }
+
+                        Debug.Log("Current Item: " + def.nameToken); */
+
+                        bool found = map.TryGetValue(def.nameToken, out effect);
+                        if (found && effect.effectType == Effect.EffectType.OnHeal)
+                        {
+                            if (effect.ConditionsMet(sender))
+                            {
+                                effect.onHealEffect(self, sender.inventory.GetItemCount(def));
+                            }
+                        }
+                    }
+                }
+                return orig(self, amount, mask, nonRegen);
             };
         }
 
@@ -272,21 +338,21 @@ namespace RandomlyGeneratedItems
                     tierCol = Color.white;
                     translatedTier = "Common";
                     mult = 1f;
-                    stackMult = 1f;
+                    stackMult = 0.7f;
                     break;
 
                 case ItemTier.Tier2:
                     tierCol = Color.green;
                     translatedTier = "Uncommon";
-                    mult = 1.7f;
-                    stackMult = 0.6f;
+                    mult = 2.2f;
+                    stackMult = 0.3f;
                     break;
 
                 case ItemTier.Tier3:
                     tierCol = Color.red;
                     translatedTier = "Legendary";
-                    mult = 2.5f;
-                    stackMult = 0.3f;
+                    mult = 4.2f;
+                    stackMult = 0.5f;
                     break;
 
                 case ItemTier.Lunar:
@@ -408,9 +474,10 @@ namespace RandomlyGeneratedItems
             }
         }
 
-        private void GlobalEventManager_OnHitEnemy(On.RoR2.GlobalEventManager.orig_OnHitEnemy orig, GlobalEventManager self, DamageInfo info, GameObject victim)
+        private void GlobalEventManager_ServerDamageDealt(On.RoR2.GlobalEventManager.orig_ServerDamageDealt orig, DamageReport report)
         {
-            orig(self, info, victim);
+            orig(report);
+            DamageInfo info = report.damageInfo;
             if (UnityEngine.Networking.NetworkServer.active && info.attacker)
             {
                 CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
@@ -435,7 +502,39 @@ namespace RandomlyGeneratedItems
                         {
                             if (effect.ConditionsMet(sender) && Util.CheckRoll(effect.chance, sender.master))
                             {
-                                effect.onHitEffect(info);
+                                effect.onHitEffect(info, sender.inventory.GetItemCount(def));
+                            }
+                        }
+                    }
+                }
+
+                GameObject victim = report.victimBody.gameObject;
+
+                sender = victim.GetComponent<CharacterBody>();
+
+                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && info.damageColorIndex != DamageColorIndex.Item)
+                {
+                    foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                    {
+                        ItemDef def = ItemCatalog.GetItemDef(index);
+                        Effect effect;
+
+                        /*foreach (KeyValuePair<string, Effect> res in map) {
+                            Debug.Log("Key: " + res.Key);
+                            Debug.Log("Description: " + res.Value.description);
+                            Debug.Log("=====================================");
+                        } */
+
+
+                        bool found = map.TryGetValue(def.nameToken, out effect);
+                        if (found && effect.effectType == Effect.EffectType.OnHurt)
+                        {
+                            Debug.Log("Current Item: " + def.nameToken); 
+                            Debug.Log("Effect: " + effect.description);
+                            Debug.Log("Conditions: " + effect.ConditionsMet(sender));
+                            if (effect.ConditionsMet(sender))
+                            {
+                                effect.onHurtEffect(victim, sender.inventory.GetItemCount(def));
                             }
                         }
                     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using RoR2.Projectile;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace RandomlyGeneratedItems
 {
@@ -32,15 +33,16 @@ namespace RandomlyGeneratedItems
 
         public delegate void StatEffectCallback(RecalculateStatsAPI.StatHookEventArgs args, int stacks, CharacterBody body);
 
-        public delegate void OnEliteCallback(DamageInfo info);
+        public delegate void OnEliteCallback(DamageInfo info, int stacks);
 
-        public delegate void OnHealCallback(HealthComponent healthComponent);
+        public delegate void OnHealCallback(HealthComponent healthComponent, int stacks);
 
-        public delegate void OnKillCallback(DamageInfo info);
+        public delegate void OnKillCallback(DamageInfo info, int stacks);
 
-        public delegate void OnTakeDamageCallback(DamageInfo info);
+        public delegate void OnTakeDamageCallback(GameObject victim, int stacks);
 
-        public delegate void OnHitCallback(DamageInfo info);
+        public delegate void OnHitCallback(DamageInfo info, int count);
+        public delegate void OnSkillUseCallback(CharacterBody body, int stacks);
 
         #endregion CALLBACK_TYPES
 
@@ -49,6 +51,11 @@ namespace RandomlyGeneratedItems
         public ConditionCallback condition;
         public StatEffectCallback statEffect;
         public OnHitCallback onHitEffect;
+        public OnTakeDamageCallback onHurtEffect;
+        public OnHealCallback onHealEffect;
+        public OnKillCallback onKillEffect;
+        public OnEliteCallback onEliteEffect;
+        public OnSkillUseCallback onSkillUseEffect;
 
         #endregion CHOSEN_CALLBACKS
 
@@ -100,10 +107,11 @@ namespace RandomlyGeneratedItems
             Passive,
 
             // OnElite,
-            // OnHurt,
+            OnHurt,
             OnHit,
+            OnSkillUse,
 
-            // OnHeal
+            OnHeal
         }
 
         #region CALLBACK_LISTS
@@ -113,7 +121,8 @@ namespace RandomlyGeneratedItems
         public List<OnKillCallback> onKillCallbackList;
         public List<OnEliteCallback> eliteCallbackList;
         public List<OnHealCallback> healCallbackList;
-        public List<OnHitCallback> onHitCallbackList = new();
+        public List<OnHitCallback> onHitCallbackList;
+        public List<OnSkillUseCallback> onSkillUseCallbackList;
 
         public List<OnTakeDamageCallback> onHurtCallbackList;
 
@@ -122,8 +131,13 @@ namespace RandomlyGeneratedItems
         #region DESC_DICTIONARIES
 
         public Dictionary<string, GameObject> projNameMap;
+        public Dictionary<OnTakeDamageCallback, string> onHurtMap;
+        public Dictionary<OnEliteCallback, string> onEliteMap;
+        public Dictionary<OnHealCallback, string> onHealMap;
+        public Dictionary<OnSkillUseCallback, string> onSkillUseMap;
 
         public List<StatEffectCallback> statCallbackList;
+
 
         #endregion DESC_DICTIONARIES
 
@@ -134,6 +148,16 @@ namespace RandomlyGeneratedItems
             num2 = Mathf.Ceil(rng.RangeFloat(100f, 170f) * tierMult);
             stat1 = Mathf.Ceil(rng.RangeFloat(7f, 15f)) * tierMult;
             chance = Mathf.Ceil(rng.RangeFloat(4f, 13f) * tierMult);
+            stat2 = Mathf.Ceil(rng.RangeFloat(1f, 5f) * tierMult);
+
+            if (conditions == true) {
+                num1 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
+                num2 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
+                stat1 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
+                chance *= Mathf.Ceil(rng.RangeFloat(0.2f, 0.5f));
+            }
+
+            // buff = BuffCatalog.buffDefs[rng.RangeInt(0, BuffCatalog.buffDefs.Length)];
             
 
             string[] prefabs =
@@ -146,14 +170,14 @@ namespace RandomlyGeneratedItems
                 "<style=cIsDamage>Fireball</style>"
             };
 
-            projectileName = prefabs[rng.RangeInt(0, 6)];
+            projectileName = prefabs[rng.RangeInt(0, prefabs.Length)];
 
             // generate maps and callbacks after choosing projname or wont work
             GenerateMapsAndCallbacks(stackMult);
 
             projNameMap.TryGetValue(projectileName, out chosenPrefab);
 
-            effectType = (EffectType)rng.RangeInt(0, 2);
+            effectType = (EffectType)rng.RangeInt(0, 5);
 
             string condesc = "";
             if (conditions)
@@ -168,6 +192,7 @@ namespace RandomlyGeneratedItems
             string onEliteDesc = "";
             string onHitDesc = "";
             string onHurtDesc = "";
+            string onSkillUseDesc = " ";
 
             switch (effectType)
             {
@@ -184,9 +209,32 @@ namespace RandomlyGeneratedItems
 
                     description = condesc + onHitDesc;
                     break;
+                
+                case EffectType.OnHurt:
+                    onHurtEffect = onHurtCallbackList[rng.RangeInt(0, onHurtCallbackList.Count)];
+                    onHurtMap.TryGetValue(onHurtEffect, out onHurtDesc);
 
+                    description = condesc + onHurtDesc;
+                    break;
+                case EffectType.OnSkillUse:
+                    onSkillUseEffect = onSkillUseCallbackList[rng.RangeInt(0, onSkillUseCallbackList.Count)];
+                    onSkillUseMap.TryGetValue(onSkillUseEffect, out onSkillUseDesc);
+
+                    description = condesc + onSkillUseDesc;
+                    break;
+                case EffectType.OnHeal:
+                    onHealEffect = healCallbackList[rng.RangeInt(0, healCallbackList.Count)];
+                    onHealMap.TryGetValue(onHealEffect, out onHealDesc);
+
+                    description = condesc + onHealDesc;
+                    break;
                 default:
                     break;
+            }
+
+            if (!conditions) {
+                description.Remove(0);
+                description.Replace(description.ElementAt(0), description.ElementAt(0).ToString().ToUpper()[0]);
             }
         }
 
@@ -235,6 +283,8 @@ namespace RandomlyGeneratedItems
 
         // on hit callbacks
         public static OnHitCallback fireProjectile;
+        public OnSkillUseCallback fireProjSkill;
+        public OnTakeDamageCallback retaliateProjectile;
 
         public void GenerateMapsAndCallbacks(float stackMult)
         {
@@ -279,71 +329,71 @@ namespace RandomlyGeneratedItems
             // stateffect callbacks
             attackSpeedBoost = (args, stacks, body) =>
             {
-                args.baseAttackSpeedAdd += ((stat1 * stackMult) * 0.01f);
+                args.baseAttackSpeedAdd += ((stat1 * (stackMult*stacks)) * 0.01f);
             };
 
             speedBoost = (args, stacks, body) =>
             {
-                args.moveSpeedMultAdd += ((stat1 * stackMult) * 0.01f);
+                args.moveSpeedMultAdd += ((stat1 * (stackMult*stacks)) * 0.01f);
             };
 
             healthBoost = (args, stacks, body) =>
             {
-                args.healthMultAdd += ((stat1 * stackMult) * 0.01f);
+                args.healthMultAdd += ((stat1 * (stackMult*stacks)) * 0.01f);
             };
 
             damageBoost = (args, stacks, body) =>
             {
-                args.damageMultAdd += ((stat1 * stackMult) * 0.01f);
+                args.damageMultAdd += ((stat1 * (stackMult*stacks)) * 0.01f);
             };
 
             shieldBoost = (args, stacks, body) =>
             {
-                float amount = body.healthComponent.fullHealth * ((stat1 * stackMult) * 0.01f);
+                float amount = body.healthComponent.fullHealth * ((stat1 * (stackMult*stacks)) * 0.01f);
                 args.baseShieldAdd += amount;
             };
 
             armorBoost = (args, stacks, body) =>
             {
-                args.armorAdd += stat1 * stackMult * 0.8f * 0.01f;
+                args.armorAdd += stat1 * (stackMult*stacks) * 0.8f * 0.01f;
             };
 
             regenBoost = (args, stacks, body) =>
             {
-                args.regenMultAdd += stat1 * stackMult * 4 * 0.01f;
+                args.regenMultAdd += stat1 * (stackMult*stacks) * 4 * 0.01f;
             };
 
             critBoost = (args, stacks, body) =>
             {
-                args.critAdd += stat1 * stackMult;
+                args.critAdd += stat1 * (stackMult*stacks);
             };
 
             secondaryCdrBoost = (args, stacks, body) =>
             {
-                args.secondaryCooldownMultAdd += stat1 * 0.7f * stackMult * 0.01f;
+                args.secondaryCooldownMultAdd += stat1 * 0.7f * (stackMult*stacks) * 0.01f;
             };
 
             utilityCdrBoost = (args, stacks, body) =>
             {
-                args.utilityCooldownMultAdd += stat1 * 0.7f * stackMult * 0.01f;
+                args.utilityCooldownMultAdd += stat1 * 0.7f * (stackMult*stacks) * 0.01f;
             };
 
             specialCdrBoost = (args, stacks, body) =>
             {
-                args.specialCooldownMultAdd += stat1 * 0.7f * stackMult * 0.01f;
+                args.specialCooldownMultAdd += stat1 * 0.7f * (stackMult*stacks) * 0.01f;
             };
 
             allSkillCdrBoost = (args, stacks, body) =>
             {
-                args.cooldownMultAdd += stat1 * 0.4f * stackMult * 0.01f;
+                args.cooldownMultAdd += stat1 * 0.4f * (stackMult*stacks) * 0.01f;
             };
 
             // on hit callbacks
-            OnHitCallback fireProjectile = (DamageInfo info) =>
+            OnHitCallback fireProjectile = (DamageInfo info, int stacks) =>
             {
                 FireProjectileInfo proj = new()
                 {
-                    damage = info.damage * num2 * 0.01f,
+                    damage = info.damage * num2*(stackMult*stacks) * 0.01f,
                     owner = info.attacker,
                     speedOverride = 100,
                     // medium speed
@@ -357,10 +407,62 @@ namespace RandomlyGeneratedItems
                 ProjectileManager.instance.FireProjectile(proj);
             };
 
+            // on hurt callbacks
+            OnTakeDamageCallback retaliateProjectile = (GameObject victim, int stacks) => {
+                FireProjectileInfo proj = new()
+                {
+                    damage = victim.GetComponent<CharacterBody>().damage * num2*(stackMult*stacks) * 0.01f,
+                    owner = victim,
+                    speedOverride = 100,
+                    // medium speed
+                    fuseOverride = 2,
+                    rotation = Util.QuaternionSafeLookRotation(victim.GetComponent<CharacterBody>().equipmentSlot.GetAimRay().direction),
+                    position = victim.GetComponent<CharacterBody>().corePosition + new Vector3(0, 1, 0),
+                    damageColorIndex = DamageColorIndex.Item,
+                    projectilePrefab = chosenPrefab
+                };
+
+                ProjectileManager.instance.FireProjectile(proj);
+            };
+
+            // on skill use callbacks
+            OnSkillUseCallback fireProjSkill = (CharacterBody body, int stacks) => {
+                FireProjectileInfo proj = new()
+                {
+                    damage = body.damage * (num2*(stackMult*stacks) * 0.5f) * 0.01f,
+                    owner = body.gameObject,
+                    speedOverride = 100,
+                    // medium speed
+                    fuseOverride = 2,
+                    rotation = Util.QuaternionSafeLookRotation(body.equipmentSlot.GetAimRay().direction),
+                    position = body.corePosition + new Vector3(0, 1, 0),
+                    damageColorIndex = DamageColorIndex.Item,
+                    projectilePrefab = chosenPrefab
+                };
+
+                ProjectileManager.instance.FireProjectile(proj);
+            };
+
+            // on heal callbacks
+            OnHealCallback barrier = (HealthComponent com, int stacks) => {
+                float increase = (stat2 * 0.01f) * (stacks * stackMult);
+                com.AddBarrier(com.fullHealth * increase);
+            };
+
+            OnHealCallback bonus = (HealthComponent com, int stacks) => {
+                float increase = (stat2 * 0.01f) * (stacks * stackMult);
+                com.Heal(com.fullHealth * increase, new(), true);
+            };
+
             /// generate maps
             onhitmap = new()
             {
-                {fireProjectile, $" gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{num2}% base damage</style>."}
+                {fireProjectile, $" gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{num2*stackMult}%</style> <style=cStack>(+{num2}% per stack)</style> <style=cIsDamage>base damage</style>."}
+            };
+
+            onHealMap = new() {
+                {barrier, $" receive <style=cIsHealing>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
+                {bonus, $" receive <style=cIsHealing>bonus healing</style> equal to <style=cIsDamage>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
             };
 
             statmap = new()
@@ -390,6 +492,20 @@ namespace RandomlyGeneratedItems
                 {atFullHp, "While at <style=cIsHealth>full health</style>,"}
             };
 
+            onHurtMap = new() {
+              {retaliateProjectile, $" upon <style=cDeath>taking damage</style>, fire a {projectileName} for <style=cIsDamage>{num2}%</style> <style=cStack>(+{num2*stackMult}% per stack)</style> damage."}  
+            };
+
+            onSkillUseMap = new()
+            {
+                {fireProjSkill, $" gain a <style=cIsDamage>{chance}%</style> chance on skill use to fire a {projectileName} for <style=cIsDamage>{num2*0.5f}%</style> <style=cStack>(+{num2*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."}
+            };
+
+            healCallbackList = new() {
+                barrier,
+                bonus
+            };
+
             statCallbackList = new()
             {
                 speedBoost,
@@ -404,6 +520,10 @@ namespace RandomlyGeneratedItems
                 utilityCdrBoost,
                 specialCdrBoost,
                 allSkillCdrBoost
+            };
+
+            onSkillUseCallbackList = new() {
+                fireProjSkill
             };
 
             conditionCallbackList = new()
@@ -421,6 +541,12 @@ namespace RandomlyGeneratedItems
             {
                 fireProjectile
             };
+
+            onHurtCallbackList = new() {
+                retaliateProjectile
+            };
+
+            
 
             projNameMap = new()
             {
