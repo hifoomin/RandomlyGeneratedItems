@@ -44,7 +44,15 @@ namespace RandomlyGeneratedItems
             RGILogger = Logger;
             RGIConfig = Config; // seedconfig does nothing right now because config.bind.value returns a bepinex.configentry<ulong> instead of a plain ulong???
             seedConfig = Config.Bind<ulong>("Configuration:", "Seed", 0, "The seed that will be used for random generation. This MUST be the same between all clients in multiplayer!!! A seed of 0 will generate a random seed instead");
-            seed = (ulong)Random.RandomRangeInt(0, 10000) ^ (ulong)Random.RandomRangeInt(1, 10) << 16;
+            if (seedConfig.Value != 0)
+            {
+                seed = seedConfig.Value;
+            }
+            else
+            {
+                seed = (ulong)Random.RandomRangeInt(0, 10000) ^ (ulong)Random.RandomRangeInt(1, 10) << 16;
+            }
+
             rng = new(seed);
             Logger.LogFatal("seed is " + seed);
 
