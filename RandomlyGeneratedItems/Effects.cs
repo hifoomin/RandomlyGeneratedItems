@@ -457,7 +457,9 @@ namespace RandomlyGeneratedItems
             OnHealCallback bonus = (HealthComponent com, int stacks) =>
             {
                 float increase = (stat2 * 0.01f) * (stacks * stackMult);
-                com.Heal(com.fullHealth * increase, new(), true);
+                ProcChainMask mask = new();
+                mask.AddProc(Main.HealingBonus);
+                com.Heal(com.fullHealth * increase, mask, true);
             };
 
             /// generate maps

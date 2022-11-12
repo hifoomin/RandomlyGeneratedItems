@@ -23,6 +23,7 @@ namespace RandomlyGeneratedItems
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
 
+        public static ProcType HealingBonus = (ProcType)89; // hopefully no other mod uses a proc type of 89 because r2api doesnt have proctypeapi 
         private static ulong seed;
         public static Xoroshiro128Plus rng;
 
@@ -132,7 +133,7 @@ namespace RandomlyGeneratedItems
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) =>
             {
                 CharacterBody sender = self.body;
-                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
+                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && !mask.HasProc(HealingBonus))
                 {
                     foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
                     {
