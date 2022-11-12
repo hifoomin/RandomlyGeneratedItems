@@ -159,8 +159,6 @@ namespace RandomlyGeneratedItems
                 }
                 return orig(self, amount, mask, nonRegen);
             };
-
-            On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
         }
 
         private void ItemCatalog_Init(On.RoR2.ItemCatalog.orig_Init orig)
@@ -268,7 +266,7 @@ namespace RandomlyGeneratedItems
                 return;
             }
 
-            tier = (ItemTier)rng.RangeInt(0, 4);
+            tier = (ItemTier)rng.RangeInt(0, 3);
 
             string translatedTier = "";
             float mult = 1f;
