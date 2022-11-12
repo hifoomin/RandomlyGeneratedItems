@@ -19,7 +19,7 @@ namespace RandomlyGeneratedItems
             "Blast", "Disposable", "Eccentric", "Executive", "Foreign", "Fuel", "Gnarled", "Gorag's", "Jade", "Milky", "Primordial", "Remote", "Royal",
             "Super Massive", "Crowdfunding", "Tropy Hunter's", "Volcanic", "Glowing", "Helfire", "Spinel", "Her", "His", "Ifrit's", "Suspicious",
 
-            "The", "The", "The", "The", "The", "The",
+            "The", "The", "The", "The", "The", "The", "The", "The", "The", "The",
 
             "Artificial", "Liquated", "Crystallized", "Wild", "Poison", "Primitive", "Stealthy", "Blazing", "Nacreous", "Invisible",
 
@@ -38,10 +38,20 @@ namespace RandomlyGeneratedItems
             "Amplified", "Defragmented", "Biased", "Based", "Empty",
 
             "Flurry of", "Barrage of", "Volley of", "Salvo of", "Gate of", "Book of", "Aura of", "Barrier of", "Agony of", "Revival of", "Retrospect of",
+            "Puzzle of", "Mask of", "Wand of", "Blade of", "Song of", "Eye of", "Belt of", "Helmet of",
 
-            "Annoying", "Awful", "Bloody", "Clean", "Combative", "Courageous", "Cute", "Adorable", "Dead", "Distinct", "Green", "Yellow", "Pink", "Monochromatic",
+            "Annoying", "Awful", "Bloody", "Clean", "Combative", "Courageous", "Cute", "Adorable", "Distinct", "Green", "Yellow", "Pink", "Monochromatic",
             "Charming", "Dangerous", "Drab", "Alive", "Bright", "Dark", "Evil", "Enchanting", "Fragile", "Jittery", "Mysterious", "Modern", "Perfect",
-            "Plain", "Real", "Fake", "Tender", "Unusual", "Imaginary",
+            "Plain", "Real", "Fake", "Tender", "Unusual", "Imaginary", "Enemy", "Glue", "Good", "Great", "Weak", "Strong", "New", "High", "Modern", "Major",
+            "Minor", "Single", "Dual", "Abstract", "Chocolate", "King's", "Moon", "Legendary", "Mythical", "Epic", "Rare", "Ratio", "Wireless", "Platinum",
+            "Contraband", "Crystallized", "Burnt", "Devil's", "God's", "Nuclear", "Bulwark's", "Umbral", "Random", "Randomized", "Meta",
+
+            "Hard", "Guarding", "Armored", "Warding", "Precise", "Lucky", "Jagged", "Spiked", "Angry", "Menacing", "Brisk", "Fleeting", "Hasty", "Quick", "Wild",
+            "Rash", "Intrepid","Violent", "Arcane", "Keen", "Superior", "Forceful", "Broken", "Damaged", "Shoddy", "Hurtful", "Strong", "Unpleasant", "Weak",
+            "Ruthless", "Godly","Demonic", "Zealous", "Quick", "Deadly", "Agile", "Nimble", "Murderous", "Slow", "Sluggish", "Lazy", "Annoying", "Nasty", "Large",
+            "Massive", "Dangerous","Savage", "Sharp", "Pointy", "Tiny", "Terrible", "Small", "Dull", "Unhappy", "Bulky", "Shameful", "Heavy", "Light", "Legendary",
+            "Sighted", "Rapid","Hasty", "Intimidating", "Deadly", "Staunch", "Awful", "Lethargic", "Awkward", "Powerful", "Frenzying", "Unreal", "Mystic", "Adept",
+            "Masterful", "Inept", "Ignorant", "Deranged", "Intense", "Taboo", "Celestial", "Furious", "Manic", "Mythical",
 
             "Femboy" // for the funny
         };
@@ -82,6 +92,13 @@ namespace RandomlyGeneratedItems
             "Caltrops", "Footwork", "Fumes",
             "Lightning", "Barrage", "Claw", "Snap", "Driver", "Rebound", "Streamline", "Beam", "Blizzard", "Bullseye", "Melter", "Sunder", "Surge", "Hyperbeam",
             "Hologram", "Recursion",
+
+             "Metronome", "Void", "Puzzle", "Piece", "Magnet", "Emblem", "Cuffs", "Flower", "Boneflower", "Booster", "Cake", "Plum", "Apple", "Cane", "Keeper",
+             "Umbrella", "Edge", "Yoyo", "Fork", "Spoon", "Boomerang", "Chakram", "Machete", "Wrench", "Mace", "Meatball", "Hand", "Sickle", "Bat", "Tongue",
+             "Inferno", "Key", "Dragon", "Waver", "Wrath", "Naginata", "Glaive", "Swordfish", "Pole", "Disc", "Hatchet", "Anchor", "Fist", "Pow", "Armor",
+             "Stone", "Skull", "Emblem", "Glove", "Shell", "Blaster", "Cocktail", "Grenade", "Harpoon", "Launcher", "Atomosphere", "Zapper", "Staff", "Scythe",
+             "Bolt", "Rod", "Fracture", "Serpent", "Burst", "Ray", "Blower", "Typhoon", "Syzygy", "Armageddon", "Flare", "Head", "Flask", "Harp", "Thorn",
+             "Tune", "Arcanum", "Blaze",
 
             "Load" // for the funny
         };

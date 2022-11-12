@@ -24,22 +24,10 @@ namespace RandomlyGeneratedItems
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
 
-        private string version = PluginVersion;
-
         private static ulong seed;
         public static Xoroshiro128Plus rng;
 
         private static ItemDef itemDef;
-
-        private static GameObject model;
-        private static Sprite icon;
-
-        private static System.Random modelRng;
-
-        private static System.Random iconRng;
-
-        // yeah i know im using system.random, placeholder for now
-        // still dont know how im gonna network this, maybe not ever lol
 
         public static ConfigEntry<ulong> seedConfig { get; set; }
 
@@ -55,13 +43,13 @@ namespace RandomlyGeneratedItems
         {
             RGILogger = Logger;
             RGIConfig = Config; // seedconfig does nothing right now because config.bind.value returns a bepinex.configentry<ulong> instead of a plain ulong???
-            seedConfig = Config.Bind<ulong>("Configuration:", "Seed", 0, "the seed that will be used for random generation. this MUST be the same between all clients in multiplayer!!!. a seed of 0 will generate a random seed instead");
+            seedConfig = Config.Bind<ulong>("Configuration:", "Seed", 0, "The seed that will be used for random generation. This MUST be the same between all clients in multiplayer!!! A seed of 0 will generate a random seed instead");
             seed = (ulong)Random.RandomRangeInt(0, 10000) ^ (ulong)Random.RandomRangeInt(1, 10) << 16;
             rng = new(seed);
             Logger.LogFatal("seed is " + seed);
 
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
-            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "the maximum amount of items the mod will generate").Value;
+            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "The maximum amount of items the mod will generate.").Value;
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
@@ -78,10 +66,12 @@ namespace RandomlyGeneratedItems
 
             On.RoR2.GlobalEventManager.ServerDamageDealt += GlobalEventManager_ServerDamageDealt;
 
-            On.RoR2.UI.MainMenu.BaseMainMenuScreen.Awake += (orig, self) => {
+            On.RoR2.UI.MainMenu.BaseMainMenuScreen.Awake += (orig, self) =>
+            {
                 orig(self);
-                foreach (ItemDef def in myItemDefs) {
-                    RoR2.UserProfile.defaultProfile.DiscoverPickup(def.CreatePickupDef().pickupIndex);
+                foreach (ItemDef def in myItemDefs)
+                {
+                    UserProfile.defaultProfile.DiscoverPickup(def.CreatePickupDef().pickupIndex);
                 }
             };
 
@@ -102,7 +92,8 @@ namespace RandomlyGeneratedItems
                 }
             };
 
-            On.RoR2.CharacterBody.OnSkillActivated += (orig, sender, slot) => {
+            On.RoR2.CharacterBody.OnSkillActivated += (orig, sender, slot) =>
+            {
                 orig(sender, slot);
                 if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
                 {
@@ -131,7 +122,8 @@ namespace RandomlyGeneratedItems
                 }
             };
 
-            On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) => {
+            On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) =>
+            {
                 CharacterBody sender = self.body;
                 if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active)
                 {
@@ -160,6 +152,8 @@ namespace RandomlyGeneratedItems
                 }
                 return orig(self, amount, mask, nonRegen);
             };
+
+            On.RoR2.Networking.NetworkManagerSystemSteam.OnClientConnect += (s, u, t) => { };
         }
 
         private void ItemCatalog_Init(On.RoR2.ItemCatalog.orig_Init orig)
@@ -235,8 +229,6 @@ namespace RandomlyGeneratedItems
             System.Random prefixRng = new();
             System.Random nameRng = new();
             System.Random tierRng = new();
-            modelRng = new();
-            iconRng = new();
 
             int attempts = 0;
 
@@ -338,21 +330,21 @@ namespace RandomlyGeneratedItems
                     tierCol = Color.white;
                     translatedTier = "Common";
                     mult = 1f;
-                    stackMult = 0.7f;
+                    stackMult = 1f;
                     break;
 
                 case ItemTier.Tier2:
                     tierCol = Color.green;
                     translatedTier = "Uncommon";
-                    mult = 2.2f;
-                    stackMult = 0.3f;
+                    mult = 3f;
+                    stackMult = 0.5f;
                     break;
 
                 case ItemTier.Tier3:
                     tierCol = Color.red;
                     translatedTier = "Legendary";
-                    mult = 4.2f;
-                    stackMult = 0.5f;
+                    mult = 12f;
+                    stackMult = 0.15f;
                     break;
 
                 case ItemTier.Lunar:
@@ -440,7 +432,7 @@ namespace RandomlyGeneratedItems
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
             myItemDefs.Add(itemDef);
-            Logger.LogWarning("Generated a " + translatedTier + " item named " + itemName);
+            Logger.LogDebug("Generated a " + translatedTier + " item named " + itemName);
 
             //On.RoR2.Language.GetLocalizedStringByToken += Language_GetLocalizedStringByToken;
         }
@@ -525,11 +517,10 @@ namespace RandomlyGeneratedItems
                             Debug.Log("=====================================");
                         } */
 
-
                         bool found = map.TryGetValue(def.nameToken, out effect);
                         if (found && effect.effectType == Effect.EffectType.OnHurt)
                         {
-                            Debug.Log("Current Item: " + def.nameToken); 
+                            Debug.Log("Current Item: " + def.nameToken);
                             Debug.Log("Effect: " + effect.description);
                             Debug.Log("Conditions: " + effect.ConditionsMet(sender));
                             if (effect.ConditionsMet(sender))
