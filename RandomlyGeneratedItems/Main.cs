@@ -4,7 +4,6 @@ using BepInEx.Logging;
 using R2API;
 using R2API.Utils;
 using RoR2;
-using RoR2.ContentManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -234,18 +233,14 @@ namespace RandomlyGeneratedItems
             string itemName = "";
             ItemTier tier;
 
-            System.Random prefixRng = new();
-            System.Random nameRng = new();
-            System.Random tierRng = new();
-
             int attempts = 0;
 
             string xmlSafeItemName = "E";
 
             while (attempts <= 5)
             {
-                var prefixRng2 = prefixRng.Next(NameSystem.itemNamePrefix.Count);
-                var nameRng2 = nameRng.Next(NameSystem.itemName.Count);
+                var prefixRng2 = rng.RangeInt(0, NameSystem.itemNamePrefix.Count);
+                var nameRng2 = rng.RangeInt(0, NameSystem.itemName.Count);
                 itemName = "";
 
                 itemName += NameSystem.itemNamePrefix[prefixRng2] + " ";
@@ -273,7 +268,7 @@ namespace RandomlyGeneratedItems
                 return;
             }
 
-            tier = (ItemTier)tierRng.Next(0, 3);
+            tier = (ItemTier)rng.RangeInt(0, 4);
 
             string translatedTier = "";
             float mult = 1f;
