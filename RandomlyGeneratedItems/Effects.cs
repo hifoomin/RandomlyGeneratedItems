@@ -470,7 +470,7 @@ namespace RandomlyGeneratedItems
 
             onHealMap = new() {
                 {barrier, $"Receive <style=cIsHealing>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
-                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsDamage>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
+                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
             };
 
             statmap = new()
