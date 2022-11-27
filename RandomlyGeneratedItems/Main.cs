@@ -23,7 +23,7 @@ namespace RandomlyGeneratedItems
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
 
-        public static ProcType HealingBonus = (ProcType)89; // hopefully no other mod uses a proc type of 89 because r2api doesnt have proctypeapi 
+        public static ProcType HealingBonus = (ProcType)89; // hopefully no other mod uses a proc type of 89 because r2api doesnt have proctypeapi
         private static ulong seed;
         public static Xoroshiro128Plus rng;
 
@@ -63,6 +63,8 @@ namespace RandomlyGeneratedItems
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
+            Effect.ModifyPrefabs();
+
             for (int i = 0; i < maxItems; i++)
             {
                 GenerateItem();
@@ -81,7 +83,8 @@ namespace RandomlyGeneratedItems
                 orig(self);
                 foreach (ItemDef def in myItemDefs)
                 {
-                    UserProfile.defaultProfile.DiscoverPickup(def.CreatePickupDef().pickupIndex);
+                    var index = PickupCatalog.FindPickupIndex(def.itemIndex);
+                    UserProfile.defaultProfile.DiscoverPickup(index);
                 }
             };
 
