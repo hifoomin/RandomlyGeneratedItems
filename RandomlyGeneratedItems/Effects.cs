@@ -63,13 +63,19 @@ namespace RandomlyGeneratedItems
         #region PREFABS
 
         public GameObject missilePrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/MissileProjectile.prefab").WaitForCompletion(), "RandomMissile");
-        public GameObject potPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBoss/ClayPotProjectile.prefab").WaitForCompletion(), "RandomClayPot");
+        public static GameObject potPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ClayBoss/ClayPotProjectile.prefab").WaitForCompletion(), "RandomClayPot");
         public GameObject voidPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/ImpBoss/ImpVoidspikeProjectile.prefab").WaitForCompletion(), "RandomVoidSpike");
-        public GameObject sawPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Saw/Sawmerang.prefab").WaitForCompletion(), "RandomSaw");
+        public static GameObject sawPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Saw/Sawmerang.prefab").WaitForCompletion(), "RandomSaw");
         public GameObject nadePrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/CommandoGrenadeProjectile.prefab").WaitForCompletion(), "RandomNade");
         public GameObject fireballPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LemurianBruiser/LemurianBigFireball.prefab").WaitForCompletion(), "RandomFireball");
 
         #endregion PREFABS
+
+        public static void ModifyPrefabs()
+        {
+            sawPrefab.GetComponent<ProjectileDotZone>().resetFrequency = 0;
+            potPrefab.GetComponent<ProjectileImpactExplosion>().blastRadius = 9f;
+        }
 
         // ░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░
         // ░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░
@@ -147,7 +153,7 @@ namespace RandomlyGeneratedItems
             chance = Mathf.Ceil(rng.RangeFloat(4f, 13f) * tierMult);
             stat2 = Mathf.Ceil(rng.RangeFloat(1f, 5f) * tierMult);
 
-            if (conditions == true)
+            if (conditions)
             {
                 num1 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
                 num2 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
@@ -433,7 +439,7 @@ namespace RandomlyGeneratedItems
             {
                 FireProjectileInfo proj = new()
                 {
-                    damage = body.damage * (num2 * (stackMult * stacks) * 0.5f) * 0.01f,
+                    damage = body.damage * (num2 * (stackMult * stacks)) * 0.01f,
                     owner = body.gameObject,
                     speedOverride = 100,
                     // medium speed
@@ -450,13 +456,13 @@ namespace RandomlyGeneratedItems
             // on heal callbacks
             OnHealCallback barrier = (HealthComponent com, int stacks) =>
             {
-                float increase = (stat2 * 0.01f) * (stacks * stackMult);
+                float increase = (stat2 * 0.01f * 0.8f) * (stacks * stackMult);
                 com.AddBarrier(com.fullHealth * increase);
             };
 
             OnHealCallback bonus = (HealthComponent com, int stacks) =>
             {
-                float increase = (stat2 * 0.01f) * (stacks * stackMult);
+                float increase = (stat2 * 0.01f * 0.1f) * (stacks * stackMult);
                 ProcChainMask mask = new();
                 mask.AddProc(Main.HealingBonus);
                 com.Heal(com.fullHealth * increase, mask, true);
@@ -465,12 +471,12 @@ namespace RandomlyGeneratedItems
             /// generate maps
             onhitmap = new()
             {
-                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{num2*stackMult}%</style> <style=cStack>(+{num2}% per stack)</style> <style=cIsDamage>base damage</style>."}
+                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{num2}%</style> <style=cStack>(+{num2 * stackMult}% per stack)</style> <style=cIsDamage>base damage</style>."}
             };
 
             onHealMap = new() {
-                {barrier, $"Receive <style=cIsHealing>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
-                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{stat2}%</style> <style=cStack>(+{stat2*stackMult}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
+                {barrier, $"Receive <style=cIsHealing>{stat2 * 0.8f}%</style> <style=cStack>(+{stat2 * stackMult * 0.8f}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
+                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{stat2 * 0.1f}%</style> <style=cStack>(+{stat2 * stackMult * 0.1f}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
             };
 
             statmap = new()

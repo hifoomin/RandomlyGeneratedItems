@@ -61,6 +61,8 @@ namespace RandomlyGeneratedItems
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
+            Effect.ModifyPrefabs();
+
             for (int i = 0; i < maxItems; i++)
             {
                 GenerateItem();
@@ -79,7 +81,8 @@ namespace RandomlyGeneratedItems
                 orig(self);
                 foreach (ItemDef def in myItemDefs)
                 {
-                    UserProfile.defaultProfile.DiscoverPickup(def.CreatePickupDef().pickupIndex);
+                    var index = PickupCatalog.FindPickupIndex(def.itemIndex);
+                    UserProfile.defaultProfile.DiscoverPickup(index);
                 }
             };
 
