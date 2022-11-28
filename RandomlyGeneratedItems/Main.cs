@@ -135,6 +135,34 @@ namespace RandomlyGeneratedItems
                 }
             };
 
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, self, report) => {
+                orig(self, report);
+                DamageInfo info = report.damageInfo;
+                if (UnityEngine.Networking.NetworkServer.active && info.attacker && report.victimIsElite)
+                {
+                    CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
+
+                    if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && info.damageColorIndex != DamageColorIndex.Item)
+                    {
+                        foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                        {
+                            ItemDef def = ItemCatalog.GetItemDef(index);
+                            Effect effect;
+
+
+                            bool found = map.TryGetValue(def.nameToken, out effect);
+                            if (found && effect.effectType == Effect.EffectType.OnElite)
+                            {
+                                if (effect.ConditionsMet(sender))
+                                {
+                                    effect.onEliteEffect(info, sender.inventory.GetItemCount(def));
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) =>
             {
                 CharacterBody sender = self.body;
