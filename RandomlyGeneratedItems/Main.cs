@@ -233,6 +233,7 @@ namespace RandomlyGeneratedItems
         private void GenerateItem()
         {
             string itemName = "";
+            string logEntry = "";
             ItemTier tier;
 
             int attempts = 0;
@@ -243,7 +244,10 @@ namespace RandomlyGeneratedItems
             {
                 var prefixRng2 = rng.RangeInt(0, NameSystem.itemNamePrefix.Count);
                 var nameRng2 = rng.RangeInt(0, NameSystem.itemName.Count);
+                var logRng2 = rng.RangeInt(0, NameSystem.logDesc.Count);
+                var logLengthRng2 = rng.RangeInt(10, 60);
                 itemName = "";
+                logEntry = "";
 
                 itemName += NameSystem.itemNamePrefix[prefixRng2] + " ";
                 // itemNamePrefix.RemoveAt(prefixRng2);
@@ -253,6 +257,15 @@ namespace RandomlyGeneratedItems
 
                 xmlSafeItemName = itemName.ToUpper();
                 xmlSafeItemName = xmlSafeItemName.Replace(" ", "_").Replace("'", "").Replace("&", "AND");
+
+                for (int i = 0; i < logLengthRng2; i++)
+                {
+                    logEntry += NameSystem.itemNamePrefix[logRng2] + " ";
+                    if (i % 12 == 0)
+                    {
+                        logEntry += ".";
+                    }
+                }
 
                 Effect buffer;
                 if (map.TryGetValue("ITEM_" + xmlSafeItemName + "_NAME", out buffer))
@@ -341,7 +354,7 @@ namespace RandomlyGeneratedItems
                 case ItemTier.Tier2:
                     tierCol = Color.green;
                     translatedTier = "Uncommon";
-                    mult = 3f;
+                    mult = 3.2f;
                     stackMult = 0.5f;
                     break;
 
@@ -349,7 +362,7 @@ namespace RandomlyGeneratedItems
                     tierCol = Color.red;
                     translatedTier = "Legendary";
                     mult = 12f;
-                    stackMult = 0.15f;
+                    stackMult = 0.2f;
                     break;
 
                 case ItemTier.Lunar:
@@ -434,6 +447,7 @@ namespace RandomlyGeneratedItems
             LanguageAPI.Add(itemDef.nameToken, itemName);
             LanguageAPI.Add(itemDef.pickupToken, effect.description);
             LanguageAPI.Add(itemDef.descriptionToken, effect.description);
+            LanguageAPI.Add(itemDef.loreToken, logEntry);
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
             myItemDefs.Add(itemDef);

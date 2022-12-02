@@ -15,9 +15,9 @@ namespace RandomlyGeneratedItems
 
         public string description;
         public float num1;
-        public float num2;
-        public float stat1;
-        public float stat2;
+        public float damage;
+        public float statIncrease;
+        public float healOrBarrier;
         public float stat3;
         public float chance;
         // public static float staticChance;
@@ -147,18 +147,19 @@ namespace RandomlyGeneratedItems
         public void Generate(Xoroshiro128Plus rng, float tierMult, float stackMult)
         {
             conditions = rng.nextBool;
-            num1 = Mathf.Ceil(rng.RangeFloat(5f, 15f) * tierMult);
-            num2 = Mathf.Ceil(rng.RangeFloat(100f, 170f) * tierMult);
-            stat1 = Mathf.Ceil(rng.RangeFloat(7f, 15f)) * tierMult;
-            chance = Mathf.Ceil(rng.RangeFloat(4f, 13f) * tierMult);
-            stat2 = Mathf.Ceil(rng.RangeFloat(1f, 5f) * tierMult);
+            //num1 = Mathf.Ceil(rng.RangeFloat(5f, 15f) * tierMult);
+            damage = Mathf.RoundToInt(rng.RangeFloat(100f, 170f) * tierMult);
+            statIncrease = Mathf.RoundToInt(rng.RangeFloat(7f, 15f)) * tierMult;
+            chance = Mathf.Round(rng.RangeFloat(4f, 13f) * tierMult);
+            healOrBarrier = Mathf.Round(rng.RangeFloat(1f, 5f) * tierMult);
 
             if (conditions)
             {
-                num1 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
-                num2 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
-                stat1 *= Mathf.Ceil(rng.RangeFloat(0.5f, 1f));
-                chance *= Mathf.Ceil(rng.RangeFloat(0.2f, 0.5f));
+                //num1 += Mathf.Ceil(rng.RangeFloat(3f, 6f) * Mathf.Sqrt(tierMult));
+                damage += Mathf.RoundToInt(rng.RangeFloat(30f, 50f) * Mathf.Sqrt(tierMult));
+                statIncrease += Mathf.Round(rng.RangeFloat(3f, 6f) * Mathf.Sqrt(tierMult));
+                chance += Mathf.RoundToInt(rng.RangeFloat(1f, 2f) * Mathf.Sqrt(tierMult));
+                healOrBarrier += Mathf.Round(rng.RangeFloat(0.3f, 1f) * Mathf.Sqrt(tierMult));
             }
 
             // buff = BuffCatalog.buffDefs[rng.RangeInt(0, BuffCatalog.buffDefs.Length)];
@@ -337,63 +338,63 @@ namespace RandomlyGeneratedItems
             // stateffect callbacks
             attackSpeedBoost = (args, stacks, body) =>
             {
-                args.baseAttackSpeedAdd += ((stat1 * (stackMult * stacks)) * 0.01f);
+                args.baseAttackSpeedAdd += ((statIncrease * (stackMult * stacks)) * 0.01f);
             };
 
             speedBoost = (args, stacks, body) =>
             {
-                args.moveSpeedMultAdd += ((stat1 * (stackMult * stacks)) * 0.01f);
+                args.moveSpeedMultAdd += ((statIncrease * (stackMult * stacks)) * 0.01f);
             };
 
             healthBoost = (args, stacks, body) =>
             {
-                args.healthMultAdd += ((stat1 * (stackMult * stacks)) * 0.01f);
+                args.healthMultAdd += ((statIncrease * (stackMult * stacks)) * 0.01f);
             };
 
             damageBoost = (args, stacks, body) =>
             {
-                args.damageMultAdd += ((stat1 * (stackMult * stacks)) * 0.01f);
+                args.damageMultAdd += ((statIncrease * (stackMult * stacks)) * 0.01f);
             };
 
             shieldBoost = (args, stacks, body) =>
             {
-                float amount = body.healthComponent.fullHealth * ((stat1 * (stackMult * stacks)) * 0.01f);
+                float amount = body.healthComponent.fullHealth * ((statIncrease * (stackMult * stacks)) * 0.01f);
                 args.baseShieldAdd += amount;
             };
 
             armorBoost = (args, stacks, body) =>
             {
-                args.armorAdd += stat1 * (stackMult * stacks) * 0.8f * 0.01f;
+                args.armorAdd += statIncrease * (stackMult * stacks) * 0.8f * 0.01f;
             };
 
             regenBoost = (args, stacks, body) =>
             {
-                args.regenMultAdd += stat1 * (stackMult * stacks) * 4 * 0.01f;
+                args.regenMultAdd += statIncrease * (stackMult * stacks) * 4 * 0.01f;
             };
 
             critBoost = (args, stacks, body) =>
             {
-                args.critAdd += stat1 * (stackMult * stacks);
+                args.critAdd += statIncrease * (stackMult * stacks);
             };
 
             secondaryCdrBoost = (args, stacks, body) =>
             {
-                args.secondaryCooldownMultAdd += stat1 * 0.7f * (stackMult * stacks) * 0.01f;
+                args.secondaryCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             utilityCdrBoost = (args, stacks, body) =>
             {
-                args.utilityCooldownMultAdd += stat1 * 0.7f * (stackMult * stacks) * 0.01f;
+                args.utilityCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             specialCdrBoost = (args, stacks, body) =>
             {
-                args.specialCooldownMultAdd += stat1 * 0.7f * (stackMult * stacks) * 0.01f;
+                args.specialCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             allSkillCdrBoost = (args, stacks, body) =>
             {
-                args.cooldownMultAdd += stat1 * 0.4f * (stackMult * stacks) * 0.01f;
+                args.cooldownMultAdd += statIncrease * 0.4f * (stackMult * stacks) * 0.01f;
             };
 
             // on hit callbacks
@@ -401,7 +402,7 @@ namespace RandomlyGeneratedItems
             {
                 FireProjectileInfo proj = new()
                 {
-                    damage = info.damage * num2 * (stackMult * stacks) * 0.01f,
+                    damage = info.damage * damage * (stackMult * stacks) * 0.01f,
                     owner = info.attacker,
                     speedOverride = 100,
                     // medium speed
@@ -420,7 +421,7 @@ namespace RandomlyGeneratedItems
             {
                 FireProjectileInfo proj = new()
                 {
-                    damage = victim.GetComponent<CharacterBody>().damage * num2 * (stackMult * stacks) * 0.01f,
+                    damage = victim.GetComponent<CharacterBody>().damage * damage * (stackMult * stacks) * 0.01f,
                     owner = victim,
                     speedOverride = 100,
                     // medium speed
@@ -439,7 +440,7 @@ namespace RandomlyGeneratedItems
             {
                 FireProjectileInfo proj = new()
                 {
-                    damage = body.damage * (num2 * (stackMult * stacks)) * 0.01f,
+                    damage = body.damage * (damage * (stackMult * stacks)) * 0.01f,
                     owner = body.gameObject,
                     speedOverride = 100,
                     // medium speed
@@ -456,13 +457,13 @@ namespace RandomlyGeneratedItems
             // on heal callbacks
             OnHealCallback barrier = (HealthComponent com, int stacks) =>
             {
-                float increase = (stat2 * 0.01f * 0.8f) * (stacks * stackMult);
+                float increase = (healOrBarrier * 0.01f * 0.8f) * (stacks * stackMult);
                 com.AddBarrier(com.fullHealth * increase);
             };
 
             OnHealCallback bonus = (HealthComponent com, int stacks) =>
             {
-                float increase = (stat2 * 0.01f * 0.1f) * (stacks * stackMult);
+                float increase = (healOrBarrier * 0.01f * 0.1f) * (stacks * stackMult);
                 ProcChainMask mask = new();
                 mask.AddProc(Main.HealingBonus);
                 com.Heal(com.fullHealth * increase, mask, true);
@@ -471,28 +472,28 @@ namespace RandomlyGeneratedItems
             /// generate maps
             onhitmap = new()
             {
-                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{num2}%</style> <style=cStack>(+{num2 * stackMult}% per stack)</style> <style=cIsDamage>base damage</style>."}
+                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{damage}%</style> <style=cStack>(+{damage * stackMult}% per stack)</style> <style=cIsDamage>base damage</style>."}
             };
 
             onHealMap = new() {
-                {barrier, $"Receive <style=cIsHealing>{stat2 * 0.8f}%</style> <style=cStack>(+{stat2 * stackMult * 0.8f}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
-                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{stat2 * 0.1f}%</style> <style=cStack>(+{stat2 * stackMult * 0.1f}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
+                {barrier, $"Receive <style=cIsHealing>{healOrBarrier * 0.8f}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.8f}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
+                {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{healOrBarrier * 0.1f}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.1f}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
             };
 
             statmap = new()
             {
-                {healthBoost, $"Gain <style=cIsHealing>{stat1}%</style> <style=cStack>(+{stat1 * stackMult}% per stack)</style> <style=cIsHealing>maximum health</style>."},
-                {attackSpeedBoost, $"Increase <style=cIsDamage>attack speed</style> by <style=cIsDamage>{stat1}%</style> <style=cStack>(+{stat1 * stackMult}% per stack)</style>."},
-                {speedBoost, $"Gain <style=cIsUtility>{stat1}%</style> <style=cStack>(+{stat1 * stackMult}% per stack)</style> <style=cIsUtility>movement speed</style>."},
-                {damageBoost, $"Increase <style=cIsDamage>base damage</style> by <style=cIsDamage>{stat1}%</style> <style=cStack>(+{stat1 * stackMult}% per stack)</style>."},
-                {shieldBoost, $"Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>{stat1}%</style> <style=cStack>(+{stat1 * stackMult}% per stack)</style> of your maximum health."},
-                {armorBoost, $"Gain <style=cIsHealing>{stat1 * 0.8f}</style> <style=cStack>(+{stat1 * 0.8f * stackMult} per stack)</style> <style=cIsHealing>armor</style>."},
-                {regenBoost, $"Increase <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>{stat1 * 4}%</style> <style=cStack>(+{stat1 * 4 * stackMult} per stack)." },
-                {critBoost, $"Gain <style=cIsDamage>{stat1}%</style> <style=cStack>(+{stat1 * stackMult} per stack)</style> <style=cIsDamage>critical chance</style>." },
-                {secondaryCdrBoost, $"<style=cIsUtility>Reduce secondary skill cooldown</style> by <style=cIsUtility>{stat1 * 0.7f * stackMult}%</style> <style=cStack>(+{stat1 * 0.7f * stackMult}% per stack)" },
-                {utilityCdrBoost, $"<style=cIsUtility>Reduce utility skill cooldown</style> by <style=cIsUtility>{stat1 * 0.7f * stackMult}%</style> <style=cStack>(+{stat1 * 0.7f * stackMult}% per stack)" },
-                {specialCdrBoost, $"<style=cIsUtility>Reduce special skill cooldown</style> by <style=cIsUtility>{stat1 * 0.7f * stackMult}%</style> <style=cStack>(+{stat1 * 0.7f * stackMult}% per stack)" },
-                {allSkillCdrBoost, $"<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>{stat1 * 0.4f * stackMult}%</style> <style=cStack>(+{stat1 * 0.4f * stackMult}% per stack)" }
+                {healthBoost, $"Gain <style=cIsHealing>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style> <style=cIsHealing>maximum health</style>."},
+                {attackSpeedBoost, $"Increase <style=cIsDamage>attack speed</style> by <style=cIsDamage>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style>."},
+                {speedBoost, $"Gain <style=cIsUtility>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style> <style=cIsUtility>movement speed</style>."},
+                {damageBoost, $"Increase <style=cIsDamage>base damage</style> by <style=cIsDamage>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style>."},
+                {shieldBoost, $"Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style> of your maximum health."},
+                {armorBoost, $"Gain <style=cIsHealing>{statIncrease * 0.8f}</style> <style=cStack>(+{statIncrease * 0.8f * stackMult} per stack)</style> <style=cIsHealing>armor</style>."},
+                {regenBoost, $"Increase <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>{statIncrease * 4}%</style> <style=cStack>(+{statIncrease * 4 * stackMult} per stack)." },
+                {critBoost, $"Gain <style=cIsDamage>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult} per stack)</style> <style=cIsDamage>critical chance</style>." },
+                {secondaryCdrBoost, $"<style=cIsUtility>Reduce secondary skill cooldown</style> by <style=cIsUtility>{statIncrease * 0.7f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.7f * stackMult}% per stack)" },
+                {utilityCdrBoost, $"<style=cIsUtility>Reduce utility skill cooldown</style> by <style=cIsUtility>{statIncrease * 0.7f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.7f * stackMult}% per stack)" },
+                {specialCdrBoost, $"<style=cIsUtility>Reduce special skill cooldown</style> by <style=cIsUtility>{statIncrease * 0.7f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.7f * stackMult}% per stack)" },
+                {allSkillCdrBoost, $"<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>{statIncrease * 0.4f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.4f * stackMult}% per stack)" }
             };
 
             conditionmap = new()
@@ -507,12 +508,12 @@ namespace RandomlyGeneratedItems
             };
 
             onHurtMap = new() {
-              {retaliateProjectile, $"Upon <style=cDeath>taking damage</style>, fire a {projectileName} for <style=cIsDamage>{num2}%</style> <style=cStack>(+{num2*stackMult}% per stack)</style> damage."}
+              {retaliateProjectile, $"Upon <style=cDeath>taking damage</style>, fire a {projectileName} for <style=cIsDamage>{damage}%</style> <style=cStack>(+{damage*stackMult}% per stack)</style> damage."}
             };
 
             onSkillUseMap = new()
             {
-                {fireProjSkill, $"Gain a <style=cIsDamage>{chance}%</style> chance on skill use to fire a {projectileName} for <style=cIsDamage>{num2*0.5f}%</style> <style=cStack>(+{num2*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."}
+                {fireProjSkill, $"Gain a <style=cIsDamage>{chance}%</style> chance on skill use to fire a {projectileName} for <style=cIsDamage>{damage*0.5f}%</style> <style=cStack>(+{damage*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."}
             };
 
             healCallbackList = new() {
