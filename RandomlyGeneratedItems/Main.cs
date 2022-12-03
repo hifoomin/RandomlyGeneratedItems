@@ -16,7 +16,7 @@ namespace RandomlyGeneratedItems
     {
         public const string PluginGUID = PluginAuthor + "." + PluginName;
 
-        public const string PluginAuthor = "HIFU";
+        public const string PluginAuthor = "HIFUPulse";
         public const string PluginName = "RandomlyGeneratedItems";
         public const string PluginVersion = "0.0.1";
 
