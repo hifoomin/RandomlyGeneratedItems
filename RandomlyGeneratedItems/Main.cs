@@ -56,8 +56,10 @@ namespace RandomlyGeneratedItems
             rng = new(seed);
             Logger.LogFatal("seed is " + seed);
 
+            Buffs.Awake();
+
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
-            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "The maximum amount of items the mod will generate.").Value;
+            int maxItems = Config.Bind("Configuration:", "Maximum Items", 100, "The maximum amount of items the mod will generate.").Value;
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
@@ -95,7 +97,7 @@ namespace RandomlyGeneratedItems
                     {
                         if (self.isPlayerControlled)
                         {
-                            self.RecalculateStats();
+                            // self.RecalculateStats(); // trout population restored
                             // :thonk:
                             // you know forcing recalcstats is terrible for the trout population
                         }
@@ -133,10 +135,38 @@ namespace RandomlyGeneratedItems
                 }
             };
 
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, self, report) =>
+            {
+                orig(self, report);
+                DamageInfo info = report.damageInfo;
+                if (UnityEngine.Networking.NetworkServer.active && info.attacker && report.victimIsElite)
+                {
+                    CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
+
+                    if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && info.damageColorIndex != DamageColorIndex.Item)
+                    {
+                        foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                        {
+                            ItemDef def = ItemCatalog.GetItemDef(index);
+                            Effect effect;
+
+                            bool found = map.TryGetValue(def.nameToken, out effect);
+                            if (found && effect.effectType == Effect.EffectType.OnElite)
+                            {
+                                if (effect.ConditionsMet(sender))
+                                {
+                                    effect.onEliteEffect(info, sender.inventory.GetItemCount(def));
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) =>
             {
                 CharacterBody sender = self.body;
-                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && !mask.HasProc(HealingBonus))
+                if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && !mask.HasProc(HealingBonus) && nonRegen)
                 {
                     foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
                     {
@@ -513,7 +543,7 @@ namespace RandomlyGeneratedItems
                         {
                             if (effect.ConditionsMet(sender) && Util.CheckRoll(effect.chance, sender.master))
                             {
-                                effect.onHitEffect(info, sender.inventory.GetItemCount(def));
+                                effect.onHitEffect(info, sender.inventory.GetItemCount(def), report.victim.gameObject);
                             }
                         }
                     }
