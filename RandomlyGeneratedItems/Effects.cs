@@ -106,7 +106,7 @@ namespace RandomlyGeneratedItems
 
         public enum EffectType
         {
-            // OnKill,
+            OnKill,
             Passive,
 
             OnElite,
@@ -139,7 +139,7 @@ namespace RandomlyGeneratedItems
         public Dictionary<OnEliteCallback, string> onEliteMap;
         public Dictionary<OnHealCallback, string> onHealMap;
         public Dictionary<OnSkillUseCallback, string> onSkillUseMap;
-
+        public Dictionary<OnKillCallback, string> onKillEffectMap;
         public List<StatEffectCallback> statCallbackList;
 
         #endregion DESC_DICTIONARIES
@@ -183,7 +183,7 @@ namespace RandomlyGeneratedItems
 
             projNameMap.TryGetValue(projectileName, out chosenPrefab);
 
-            effectType = (EffectType)rng.RangeInt(0, 6);
+            effectType = (EffectType)rng.RangeInt(0, 7);
 
             string condesc = "";
             if (conditions)
@@ -242,6 +242,13 @@ namespace RandomlyGeneratedItems
                     onEliteMap.TryGetValue(onEliteEffect, out onEliteDesc);
 
                     description = condesc + onEliteDesc;
+                    break;
+
+                case EffectType.OnKill:
+                    onKillEffect = onKillCallbackList[rng.RangeInt(0, onKillCallbackList.Count)];
+                    onKillEffectMap.TryGetValue(onKillEffect, out onKillDesc);
+
+                    description = condesc + onKillDesc;
                     break;
 
                 default:
@@ -505,11 +512,44 @@ namespace RandomlyGeneratedItems
                 com.Heal(com.fullHealth * increase, mask, true);
             };
 
+            // on kill callbacks
+            OnKillCallback projOnKill = (DamageInfo info, int stacks) => {
+                CharacterBody body = info.attacker.GetComponent<CharacterBody>();
+                FireProjectileInfo proj = new()
+                {
+                    damage = body.damage * (damage * (stackMult * stacks)) * 0.01f * 2,
+                    owner = body.gameObject,
+                    speedOverride = 100,
+                    // medium speed
+                    fuseOverride = 2,
+                    rotation = Util.QuaternionSafeLookRotation(body.equipmentSlot.GetAimRay().direction),
+                    position = body.corePosition + new Vector3(0, 1, 0),
+                    damageColorIndex = DamageColorIndex.Item,
+                    projectilePrefab = chosenPrefab
+                };
+
+                ProjectileManager.instance.FireProjectile(proj);
+            };
+
+            OnKillCallback healOnkill = (DamageInfo info, int stacks) => {
+                CharacterBody body = info.attacker.GetComponent<CharacterBody>();
+                HealthComponent com = body.healthComponent;
+                float increase = (healOrBarrier * 0.01f * 3) * (stacks * stackMult * 3);
+                ProcChainMask mask = new();
+                mask.AddProc(Main.HealingBonus);
+                com.Heal(com.fullHealth * increase, mask, true);
+            };
+
             /// generate maps
             onhitmap = new()
             {
-                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{damage}%</style> <style=cStack>(+{damage * stackMult}% per stack)</style> <style=cIsDamage>base damage</style>."},
+                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{damage * 2}%</style> <style=cStack>(+{damage * stackMult * 2}% per stack)</style> <style=cIsDamage>base damage</style>."},
                 {applyBleed, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to <style=cDeath>bleed</style> a target for <style=cIsUtility>{speedOrBleed} seconds</style>."}
+            };
+
+            onKillEffectMap = new() {
+                {projOnKill, $"On kill, fire a {projectileName} for <style=cIsDamage>{damage*0.5f}%</style> <style=cStack>(+{damage*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."},
+                {healOnkill, $"Receive <style=cIsHealing>healing</style> equal to <style=cIsHealing>{healOrBarrier * 0.1f * 3}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.1f * 3}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon <style=cIsHealing>killing an enemy</style>"}
             };
 
             onHealMap = new() {
@@ -561,6 +601,11 @@ namespace RandomlyGeneratedItems
             healCallbackList = new() {
                 barrier,
                 bonus
+            };
+
+            onKillCallbackList = new() {
+                healOnkill,
+                projOnKill
             };
 
             statCallbackList = new()

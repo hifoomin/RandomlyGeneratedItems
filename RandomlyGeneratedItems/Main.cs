@@ -163,6 +163,30 @@ namespace RandomlyGeneratedItems
                         }
                     }
                 }
+                else {
+                    if (UnityEngine.Networking.NetworkServer.active && info.attacker)
+                    {
+                        CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
+
+                        if (sender && sender.inventory && UnityEngine.Networking.NetworkServer.active && info.damageColorIndex != DamageColorIndex.Item)
+                        {
+                            foreach (ItemIndex index in sender.inventory.itemAcquisitionOrder)
+                            {
+                                ItemDef def = ItemCatalog.GetItemDef(index);
+                                Effect effect;
+
+                                bool found = map.TryGetValue(def.nameToken, out effect);
+                                if (found && effect.effectType == Effect.EffectType.OnKill)
+                                {
+                                    if (effect.ConditionsMet(sender))
+                                    {
+                                        effect.onKillEffect(info, sender.inventory.GetItemCount(def));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             };
 
             On.RoR2.HealthComponent.Heal += (orig, self, amount, mask, nonRegen) =>
