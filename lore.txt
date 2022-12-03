@@ -1,0 +1,562 @@
+hello everybody and welcome to the fully updated item and equipment tier list for patch
+1.0 of risk of rain 2. if you've seen any number of my previous tier list know that this one will have
+some sweeping changes to what you've seen before so don't be too surprised if you see some radical shifts up or down
+also if you want a reference for when you're in the game there is a spreadsheet version of this list in the description below i'll split the items
+into categories based on the rarity i'll start with commons or whites then move to greens reds etc the ranks i give will
+strictly adhere to the following scale from worst to best based on an item or equipment's effect and
+note there are no in-between ranks f is reserved only for very specific effects that i recommend you avoid
+entirely d is for effects that are weak or entirely outclassed by others in the same rarity see the effects are okay but nothing
+special b the effect is good but either inconsistent or outclassed a the effect is great and
+s the effect is amazing these are the top tier items i play exclusively on monsoon difficulty
+and the ranks i give are indicative of the general usefulness of an effect on any survivor in any
+circumstance also there are a handful of effects that have multiple ranks attached to them as they do perform drastically different
+under specific circumstances alright long intro let's begin here with the common items starting in d
+tier with the bustling fungus fungus has always had the issue of viability not due to its numerical effect but rather
+its method of activation standing completely still for two whole seconds is already hard enough past the
+first couple stages let alone continuing to stand still while it slowly trickles your hp up there are just far
+too many better sources of healing in the game to compete with for the poor old fungus and here is a great time to
+mention that multiple rank exception the fungus of course performs significantly better on the engineer specifically with
+his stationary turrets to the point of it pretty much being an essential item his turrets receive all of his items and are always standing still so
+just a couple fungus increase their tankiness by an extreme amount the second and last item in d tier is
+the focus crystal similar to the fungus staying in melee range is too inconsistent of an effect to take advantage of in most situations
+this one has another obvious exception that one being melee survivors in which the focus crystal gets an
+a in all other cases though you just will not be that close to enemies past the first few stages or else you're just
+asking to die moving on to c tier we start with the bundle of fireworks they're a fun item to stack and watch the entire stage get filled
+with heat-seeking death works but aside from them being a novelty they don't bring much else to the table having to interact with something on the
+stage means that once you you know run out of stuff to interact with they're a useless item can you endlessly print them sure should
+you probably not next crowbar while you may think that dealing a whopping 50 extra damage to a target is a pretty
+darn great effect which it is by itself the consistency is not as soon as your target dips below 90
+health the crowbar is rendered completely useless which means unless you are literally one-shotting things you're not getting as much bang for your
+buck as possible with the crowbars well then you may be asking just shave your largest instant of damage to first
+use while the target is still full hp that way you'll always get the effect in theory yes that's exactly what you
+should do however in practice as in when you're actually playing the game that's a whole lot easier said than done most of the time your highest
+damaging thing the one you can abuse crowbars with the most is your equipment slot which has a cooldown what's better than
+sitting idly by hoping that after the next 30 seconds passes by your equipment crits procs a band an atg maybe a
+ukulele or two and that the target is still above 90 health when all of those things finally happen how about just damaging and
+killing stuff as usual in this game the less thinking your items make you do the better next energy drink
+whoa hold up hold up yes movement speed and mobility in general are both integral to staying alive in risk of
+rain too so why is our good friend the energy drink who we've all known and loved for so long down here in c
+tier allow me to explain when you press your sprint key your existing momentum is multiplied by 1.45 which is a 45
+increase note that i said existing movement as in whatever speed you're already moving at is what it's increased
+by when sprinting here in lies the problem with the energy drink its effect is only added to your speed
+after you've already begun sprinting okay you say why is this bad it's still more speed than a goat hoof while sprinting right
+for the first stack yes that 30 increase from energy drink is more than what a goat hoof provides
+however for each additional stack the 20 is actually less than a goat hoof
+because remember while sprinting all of your speed is given a 45 increase so that 14 from the hoof turns into a
+20.3 while sprinting which is more than the energy drink so it's not that the energy drink is bad
+just that it's outclassed in every way past the first stack by the goat hoof due to the hoof granting increased
+movement speed at all times next fresh meat a little bit of region after killing a target is useful early
+on but the flat 2 hp per second doesn't scale too well and once your hp pool gets into the upper hundreds there
+are much better healing effects to chase after than the meat next gasoline similar to the issue with meat the aoe damage is useful early on
+to wipe out groups but once you move into the later stages the dps just cannot keep up with your other damage it's nice to
+have especially on survivors with little to no innate area capabilities but it is outclassed by many other things down
+the road next personal shield gens it's hard to get through one of my streams twitch.tv slash fully gaming heat without clarifying the shield gen's
+effect on your one shot protection so i'll just start with that if you didn't know there is a hidden mechanic although it's not that hidden anymore with the
+health bar update in 1.0 called one shot protection if you are at or above 90
+of your combined max hp which is your regular health plus any shields not barrier that you have you cannot die
+to one instance of damage there are a few more things to one shot protection such as its lingering duration but in regards to
+the shiljins the problem is not that shields remove or disable your one shot protection but rather significantly
+alter how it's kept up see your shields cannot be leached or regen normally the only way to restore missing shields is to take
+absolutely no damage for seven seconds and then allow them to fill up back to their full amount which takes no longer
+than two seconds this is the issue with shields and one shot protection if you take heavy damage and lose your one shot
+protection you do not want to be stuck around waiting for that close to 10 seconds until it is back up everyone who's
+gotten past the first loop knows that there are plenty and i mean plenty of things that can one shot you in your run so why would you want to
+intentionally yourself by not having one shot protection up as much as possible now are shield gens
+bad no not necessarily extra hp is pretty nice to have but is the tiny amount of hp the shields
+actually provide you worth the trade-off of being wary of a one shot around every single corner not to mention your overall reduction to
+healing and region capabilities to me no it's not which is why the shield gen receives ac next rusted key while you have at least
+one key a lockbox will spawn in a random place on each stage which when open gives you a random item whose rarity is
+based on how many keys you have in total so more keys equals better loot the issue is that you really have to go out
+of your way to scout for it you'll probably miss the lockbox too many times in a run to count can you print keys on
+keys on keys and hunt the lockbox down every single stage for a free red item quote unquote i mean
+yeah if you want to lose all of your other common items in the process but being realistic something like that isn't going to happen until like the end
+of your second loop and beyond anyway which makes the consistency of the keys effect not very high to say the least next stun
+grenade disabling targets for a short amount of time is useful for things like elder marians imps golems and such but many
+other dangerous enemies are immune to stuns most notably bosses so their overall effect is limited just
+grab a couple stacks of stun grenade for the smaller guys and then forget about them lastly war banner it was buffed here in the 1.0
+patch to not drop whenever you activate the teleporter as well as when you level up while it's a good change it wasn't enough to propel the war banner any
+further up the ranks it's still a rather small area to play around for the slight increase to movement and attack speed so
+similar to the stun grenade if you have a few stacks cool otherwise it's not a big deal to be absent in new runs
+moving up to b-tier we start with the cautious slug the slug provides some of if not the best early game healing around with
+the only requirement being you not taking damage while the healing occurs it's always nice to have a couple slugs
+so that the option of retreating i mean tactically withdrawing from a situation and regaining any lost hp is available next monster tooth this is
+like the inverse slug the more damage you have and the faster you kill things the more you are rewarded for being aggressive with the tooth healing you
+per enemy killed why the jump into b-tier because the addition of the maximum hp heal on top of the flat amount it's still
+great to have a couple teeth early on but now they scale a teeny bit into the mid game as well whereas before they'd be next to useless
+upon arriving in stage four it's always nice to see a tooth or two pop up in the first couple stages next repulsion armor the flat damage
+reduction is applied to all sources of damage including damage over time which is the main reason to
+pick these bad boys up five flat damage per stack doesn't scale too well when the enemies start dealing thousands of damage per shot but it is
+pretty good when damage over times barely get into the 50s and 60s in the first loop let alone the hundreds just two or three
+repulsions can and probably will save your life from a pack of magma worms or imp overlords lastly sticky bomb what can i say the
+little guys have grown on me a bit since their blatant execution way back in scorched acres i'm kidding they
+were definitely too op and needed a nerf having the extra 180 damage at the end of your proc chains is
+quite useful to pump your overall damage up and otherwise getting the occasional bomb to proc isn't a bad thing either after all
+more damage is always the right answer moving on now to the a tier we start with armor-piercing rounds
+with the addition of the final boss on stage six armor-piercing grounds have received an indirect buff and are very much worth taking
+multiple stacks of early on into a run they were never bad to get just less desirable than others past the first one
+or two stacks but now if you plan on taking down the final boss especially you need some
+armor piercings in your run on top of that they also help with the regular teleporter fights by significantly reducing the amount of
+time you focus on the boss and more on the other threats that spawn which you know you're kind of doing that whole process once per stage so yeah
+they're pretty useful i'd say next backup magazine every survivor's secondary ability is quite powerful
+usually relating to aoe damage in some way so having additional charges of it is surprise surprise a powerful effect not
+much else to say about this one next medkit along with the monster tooth medkit also received a nice percent hp
+heal on top of the flat amount but the nature of the medkit's effect bumps it all the way up into a tier getting
+healed after you take damage being a good thing is a no brainer right well by now healing five percent of your health
+per stack medkit's consistency was drastically increased it feels really good to get to
+stage five get smacked by an overloading brass contraption and then healing back fifteen percent of the damage lost just
+by running away without multiple stacks sure the heal isn't anything to write home about but the sheer number of hits
+you'll be taking actually ends up restoring more hp overall than all but the best forms of healing in the game
+seriously the new med kits feel great next soldiers syringe never did i think the day would come
+where the syringes and medkits were in the same tier yet here we are now is this because their effects are similar enough in
+strength to warrant the same tier no actually it's simply that the syringes aren't unique enough in their
+effect there are so many other sources of attack speed in this game that the need for anything more than six or seven
+syringes is complete overkill in my opinion the zerker pauldron warhorn predatory instincts all of these items
+give significantly more than 15 attack speed per stack so why waste your white scrap or items in general on
+printing syringes again i do recommend getting a handful five to seven syringes to get that baseline attack speed up but past that
+point simply rely on other sources lastly topaz broach barrier is a valuable asset to have at
+any point in a run you know having more hp and all that kind of stuff past the first few stages it takes quite a few anywhere from seven to ten
+stacks of roads to reasonably maintain your total pool so be sure to keep that investment in mind when you do find a printer
+moving now to the tippity top of the common items s-tier starting with lensmaker's glasses critical strikes
+double your damage one pair of glasses grants 10 crit so you can think of this relationship as each stack of crit glasses granting 10
+percent more damage the only exception to this rule would be damage over time as those hits deal base damage and cannot be
+scaled by crits but for the vast majority of other sources of damage kritz scale them extremely well i
+recommend to stop printing quick glasses at 9 stacks not 10 as both the predatory instincts and harvester sites give an
+additional 5 crit and chances are if you found a crit printer you probably have or will shortly have a single predatory or
+scythe next paul's goat hoof i pretty much detailed this item in the energy drinks explanation but i'll give you a
+quick rundown here again the 14 movement speed per stack is applied to you at all times and on top
+of that when you sprint all of your momentum is given a 45 increase meaning each stack of a hoof
+effectively grants 20.3 movement speed while sprinting this makes the goat hoof undoubtedly better for energy drink in
+every way it affects you while strafing jumping walking sprinting everything i can't stress enough how
+important the ability to quickly dodge threats is in this game making the goat hoof not only one of the best commons but one of
+the best items overall to get in your runs next tougher times when all else fails
+and you do inevitably make a mistake tougher times is always there to have your back it has a pretty self-explanatory effect
+giving chance to completely block incoming damage both from direct hits and over time but its numerical values are a different
+story in short it scales hyperbolically meaning it receives less and less benefit per stack and can never truly
+reach a 100 chance the specific formula for block chance is this but don't worry about trying to do
+the math in your head while playing the game as a good break point to always remember is that 10 teddy bears equals
+60 block chance exactly so whenever i find a teddy printer i like to stop at 10 stacks for that 60
+block because it feels amazing in the majority of situations and doesn't require too much investment also your
+luck stat which is increased by the clover and decreased by purity has no effect on teddy bears finally oh baby
+you know it the tri-tip dagger what else can i even say other than that bleeds are now essentially permanent and
+scale infinitely like how is that not absolutely busted it's important to note here that the chance to bleed
+is affected by whatever the proc coefficient of the hit is meaning if you're using something like commando's primary which has a 1.0
+coefficient you need seven daggers to cap your bleed whereas something like the captain's primary with its .75 proc
+coefficient means that you would need nine stacks to cap it get it cap you bleed while playing the captain okay
+seriously though bleeds are insane sources of single target dps and in their current state tri-tip daggers are
+extremely easy to scale up to the point of melting through even the tankiest of enemies jumping to the next tier of
+uncommon items let's begin here again with the d ranks starting with the left on daisy yes this thing has saved my life
+multiple times but i cannot justify placing it any higher because of its consistency um actually the left on deja's always
+activated even intervals during the teleporter's charge which is actually the very definition of consistency okay thank you very much humor well yeah okay
+the effect is literally consistent in reality there's no guarantee that you are missing a large chunk or
+really any hp at all when it goes off again there are times where the daisy pops in in the heat of battle and smacks you in the
+face with that much needed 50 heal but those times are very few and far between the others where it just
+kind of pops out and fizzles away like a stagnant fart the only other item joining the daisy and d tier is the squid poglet simply put
+there is far too much competition in the green rarity to give the pog lips anything higher than a d their effect is lackluster and their
+consistency is extremely low that's it you have to interact with something to get them to spawn so
+fireworks but once they're there they do negligible damage and literally kill themselves by just sitting around their
+30 second duration is not an actual timer but rather tied to their hp which slowly reaches zero over 30 seconds
+meaning sure if you manage to heal them they can stay alive for longer than 30 seconds at a time but uh yeah you go
+ahead and play around your apocalypse and keeping them alive as long as possible let me know how that works out for you moving up to c tier starting with
+bandolier to me bandler perfectly represents an average item it has a great effect completely resetting all of your
+cooldowns including fully restoring any charges on your charge based abilities but set effect is gated behind killing
+an enemy and successfully hitting the percent chance to drop it's always good to have a couple bandolier stacks but you're never going
+to get to the point of saying wow my bundlers sure are carrying this run right now and that's okay next chrono bobble by itself the effect
+is pretty much worthless but when paired with the death mark item which is the sole reason for the bobble c rank it
+proves itself quite useful let me make it clear slowing enemies is not a valuable trait due to the vast majority
+of enemies having ranged attacks and the slow only applies to their movement speed but again it is
+worth having just one bobble for the death mark next old war stealth kit similar to the daisy there are definitely times where the stealth kit
+can save your life or at the very least give you some much needed breathing room to escape a threat and reassess your
+approach but for the most part it just kind of sits there in your inventory not a great item but definitely not a bad one to
+have either next red whip the speed it provides can help you traverse the stages quicker and increase your overall
+dlph to include per hour but you'll soon realize that oh shoot i still need to kill some stuff
+and suddenly the whip takes the backseat and outcome the big boys lastly rose buckler again another pretty
+neat effect gated behind inconsistency there's one no guarantee that you'll be sprinting while taking damage
+and two no guarantee that you'll be taking damage while sprinting see the point outside of a few edge cases like the huntress
+where you can effectively be sprinting and maintaining full dps at all times you won't get much mileage out of the rose buckler moving up to b-tier
+starting with berserker pauldron a nice chunk of movement at attack speed when killing enemies in quick succession is a very good effect
+as i explained with syringes there are many sources of attack speed and the zircon pauldron is one of those sources
+so long as you have a bit of innate aoe and a few items to aid you you should have no problem maintaining
+the zircopulgent procs when they matter the most such as during the teleporter next in fusion i've actually come to appreciate
+the infusions hp increase more and more especially with the addition of stage 5 and its crazy
+enemy types there have been more and more threats gradually added to the game including the 10 increased difficulty scaling with the
+current patch so infusion has thus become more and more lucrative having an additional 1 or 200 hp alone makes a
+world of a difference when you reach stage 5 and have just under 500 total health hashtag just hunters things next leeching seed
+similar to the relationship of hooves versus energy drinks the leaching seed simply pales in comparison to the
+harvester's scythe i'll explain more once we get there but in short the one hp per stack of seed is useful early on
+but quickly falls off without multiple stacks which you'd be better off getting in sights instead again it's definitely
+useful to have a seat or two early on and it's not a bad item it just gets outclassed quickly next
+razor wire you do not grab a razor wire and suddenly expect to annihilate everything in sight when you take damage
+rather you think huh what if i purposefully get bled or ignited here sure enough that is where the razor wire shines the most
+where you intentionally get inflicted with a damage over time such as a magma worm burn or an imp overlord bleed the
+hellfire tincture equipment etc etc and automatically retaliate back the power that gives you in the early stages is
+the sole reason i'm giving razerwire a b rank because otherwise yeah it's a pretty poopy item and obviously
+yes rex performs much better with razerwire than the other survivors due to you know killing himself with his own
+abilities i'd give it an a not an s on rex because the stacking effect is not that amazing lastly war
+horn here's another example of a great source of attack speed and it has a rather consistent effect to boot now with something like the crayon
+accumulator and its 140 second cooldown yeah that isn't the greatest of synergies however with something like
+the gnarled wood sprite or royal capacitor warhorn's uptime can be close to if not totally permanent heck
+even picking up a blast shower isn't that terrible of an idea before you find a top tier equipment just to maintain your warthorn moving on
+now to a tier we start with death mark its effect 50 increase damage to a marked target is
+absolutely gargantuan but needing four separate debuffs to trigger it is what's holding this guy back from
+an s rank things that count as debuffs are basically anything that shows above the health bar of the enemy so
+slows burns bleeds and such it's very important to note that a stun is not a debuff so stun grenades do not
+count towards the death mark's proc some survivors come with debuffs in their kit such as acrid artificer and rex who actually comes with two ooh what
+a special little robot so keep that in mind when you're looking for more things to proc the death mark next gore's tone like in fusion i've come to
+enjoy the tome's effects more and more even with a single stack the amount of time the tomes can save you in the long
+haul can be significant which makes it a very valuable pickup the earlier you are in your run yeah once things are spawning left and
+right its procs become less important but until that point it's always nice to see a little gold pile plop out from an enemy its wording is a
+little bit vague all the skills over time part means is that when you arrive on a stage the gold granted by the tome
+is at a bare minimum the same amount as the cost of a regular chest or multi shot and this amount increases in tandem with
+your in-game difficulty so if you're on stage one atom will grant at least 25 gold and if you're on like
+stage 10 where the chests are 2 000 gold a tome will also give at least 2 000 gold next
+chiaro's band it's safe to say that yes the changes to ice and firebands are absolutely a buff to their overall
+effectiveness wait how is fireband only at here doesn't it do more damage than ice yes but again it's all about consistency ice band's damage happens
+immediately when it procs while the fireband relies on the tornado staying on target for the full duration yes the
+tornado's area was increased drastically compared to what it was before but i've noticed the chance for it to stay on
+target for all but the largest enemies like the alloy worship unit is quite low enemies simply move far too much and or
+are just small themselves so even the slightest moments can take them completely out of its damage again yes the band changes are amazing
+and yes they are absolutely still top tier items but fireband is the less desirable out of
+the two next old guillotine like the sticky bombs our lord and savior the guillotine has also relinquished its throne as
+king the bump down from s to a is warranted for twofold one it was nerfed numerically going from 20
+execute to 13. note that this value also scales like teddy bears where each stack gets less and less powerful and can
+never truly reach 100 and 2 the elites themselves were actually nerfed substantially with this
+patch the malachites and celestine lost more than 20 of their total hp so those changes
+combined place the guillotine down here in a tier it's still a great item obviously just not as essential as it
+was before lastly wax quail it continues to be a staple for your overall movement in any run
+all while only needing a few stacks to truly shine in fact quell has kind of an interesting balance where the
+more stacks you have the less powerful the item becomes and i'm not talking about scaling i'm saying you do not want
+to have more than three or four quails else you'll be shot forwards at such a large distance that it's straight-up becomes
+uncontrollable stop at three quails that is more than enough momentum for dodging threats moving on now to the big boys of
+the uncommons s tier starting with the atg missile i mean come on is there any reason why
+this guy isn't a top tier item deals a hefty amount of damage has a decent proc chance and can cascade your damage into
+insane levels and proc chains due to having a 1.0 proc coefficient however while there is absolutely no reason why
+the atg isn't s tier i can't really say it's alone in its place as the best damage item overall anymore
+uh oh sneaky foreshadowing next fuel cell an additional charge and decreased cooldown for your
+equipment per stack yep sign me right up your equipment slot is an extremely important choice for any
+successful run and an item that directly benefits every single equipment out there is a fantastic pickup in
+any circumstance not much else to say next harvester sights all right let's take it back to the le2 seat one hp per
+hit not a bad effect remember well the scythe grants eight health only four for each additional stack but requires that hit
+to be a critical strike thing is crits aren't that rare to come across in fact with just the scythe alone your
+crit chance is six percent five percent from the item and one percent from your survivors and eight crit meaning that eight hp per crit can
+be averaged out to .48 per hit which is six percent of the value however even with just a single pair of
+crit glasses on top so 16 total crit a single stack of scythe now grants 1.28 hp per hit which
+is more than the leaching seat and on top of that that's just with one scythe and one pair of crit if you get
+more of either of those you increase this amount even further compared to the leeching seed so yes scythe is undoubtedly the
+king of leech while it's dual scaling with both more crit and you know more sights exists next hopefully in a game where
+traversing the stages can prove difficult without the necessary verticality as well as movement in general being such an important factor
+to staying alive the hopu feather is always an amazing asset to have one jump how about five maybe even ten
+who cares the more the merrier staying above your enemies while also maintaining complete directional control
+is something that only the hopu feather can grant you which warrants its place here in s tier next predatory instincts yet
+another source of attack speed and in my opinion the best one the more you crit the more attack speed you get crit is
+plentiful enough to come by so maintaining your stacks of predatory is deceptively easy and once you do reach capped crit there
+is no stopping the flurry of hits coming the enemy's way i highly recommend holding off on extreme amounts of syringes due to the
+consistency of predatory next rounds band ah here we are the ice band as i've already said the band changes
+feel amazing to play with and the ice band is now the unequivocal definition of
+consistent damage to understand why let's talk about how the bands now proc they are no longer related to chance but rather are
+guaranteed to proc if your hit's base damage is 400 or greater i place emphasis on bass because effects like
+critical strikes crowbars focus crystals armor piercing grounds etc do not increase the base of a hit and rather scale the
+total amount basically if the percent of whatever hit you're using to determine the band proc is not 400 or more you will never see a
+band proc on that hit regardless of crit boss type crowbars etc now what does this mean for their
+consistency overall well very few survivors lack an ability with 400 damage in their most
+optimal loadout which will be the next video i put out and zero survivors lack an ability overall
+that has at least 400 damage associated with it in fact that's probably why the rather arbitrary 400
+base damage was used for their proc as it gives every survivor a chance to use them with their innate abilities and not
+from external sources like items or equipment and that brings up the next point i want to cover procking bans via items and equipment
+this is why the change just feels so good being able to hold your bands until you release a capacitor shot or proc and
+atg and have the bands deal massive damage based off of that is a much needed mechanic of player agency
+that we've been missing out on to intentionally chunk large targets via ice or fireband proc and to do that
+consistently is the main reason why the band changes are excellent ice band proves more useful overall in its instantaneous
+damage rather than relying on the tornado to stay on target which is why it receives an s and not an a next yooka-laylee proc
+chains will still make up the majority of your overall damage in a run despite the massive bleed changes and the ukulele is
+still the most common source to find and get those chains going a single stack can turn the tides of an otherwise lackluster run and with multiple these
+screen-wide death capabilities cannot be understated finally will of the wisp similar to ukuleles the primary use of
+these bad boys is to begin proc chains wisps also have the added benefit of being more of a nuke than a consistent source of aoe so
+if you manage to bundle up a group of mobs and then get a chain reaction of explosions to take place you'll probably end up destroying
+everything on the entire stage in the process moving on to the next rarity the legendary items starting here in c tier
+with the dio's best friend legendary items are where most of the sweeping changes i mentioned at the start of the video are taking place the dios however
+is not one of those changes it continues to be a great effect gated behind a terrible consistency
+think of it like this dios only does something when you die and when you do it goes straight back to
+doing nothing again yes it literally prevents your death and thus your run from ending but you know what
+else would do that how about any other item in the game that actually does something like provide damage mobility or healing yeah
+dios does none of that i mean not even the expired bear after the fact counts as an actual item
+it's untiered meaning it can't be printed or scrapped there are simply far better items to get whenever you open a
+legendary chest or get lucky enough to see one as a random drop next frost relic the aoe and damage have
+both been gradually increased throughout the game's early access lifespan and now and the full release those changes really haven't accumulated to
+anything much different than what it was before it's still a small area and does negligible damage relative to
+other sources yes it's better on melee survivors but again i'd much rather have many different reds than a frost relic
+even on them next headstomper despite it getting some chunky buffs in this patch it sadly suffers the same fate as the
+frost relic being outclassed by too many other items the extra jump height is fine albeit it gets annoying when you get to
+a certain point in your run but you feel like you're just floating forever the fall damage negation is great but more of a novelty than anything
+and the damage well you tell me how likely you are to hit that boss in the middle of a sea of lesser wisps imps
+brass contraptions and greater wisps also whoops a blazing elder lemurian is there too and oh a malachi just spawned on top of
+that have fun dropping in to say hi next happiest mess it's always been a cute little item with not much tangible
+benefit the ghosts draw aggro off of you and deal some okay damage i guess but let's be honest
+you really only pick this up because it's a smiley face next interstellar desk plan it pleases me to say that the desk plant has been buffed
+enough to be designated as a mid-tier item sadly it's still one of the worst red
+items to get as you'll find few and far situations in between to actually warrant standing still within
+some tiny healing zone on the ground for extended periods of time you'll either a have enough healing already to be fine
+or b have threats around that prevent you from standing around a small circular zone it's not nearly as bad as it used to be but you'd
+be remiss to get this item over anything else next nukahana's opinion the wording on the item is a bit confusing basically as you heal you fire
+skulls out that deal damage based on your max hp getting more hp increases the skull's direct damage
+while getting more healing increases the rate at which you fire them unfortunately the damage per hit is far
+too low to enable a meaningful play style of running around and basically melee range and having your skulls kill everything
+and thus the nukahana stays in seatier however on the engineer and his abungal buddies the nukahanas
+performs considerably better than on anybody else in which i'd give it an a lastly wake of
+vultures the item is a fantastic concept however in its current state elite affixes are just too weak for
+players to use the strongest ones the celestine and malachite are mostly that way because the monsters themselves gain
+massive hp and damage while players only get the actual elite effect and not any stat increases don't get me
+wrong i'm not saying we need to get the stat increases as well for this item to become actually useful just that the elite affixes in general
+are not that good and by extension the wake of voters moving on now to b-tier well this is
+awkward there's only one aegis i thought about it for a bit on what should be here but ultimately concluded that the aegis should be by
+itself due to having a decent effect with some decent uptime normally that would warrant a c
+rank but due to the legendary item's uniqueness and their effects as well as their general power i started
+their ranks at sea so here we are with the aegis at a b by having just a couple broaches and a handful of legion seeds sights or other
+healing sources you can maintain a good portion if not all of your barrier with a single aegis not too shabby but in comparison
+to the rankings above it aegis can't really compete moving up into a tier we begin with the alien head
+25 cooldown reduction to all abilities including their charge recovery time is a very powerful
+effect not really much else that you say here right next brain stocks 25 how about completely removing the
+cooldowns instead take that alien head except not really because there is a local 0.5 second cooldown for all
+abilities so if you've ever wondered why you can't literally just hold an ability down and watch it spam at the speed of light whenever you get a brain socks
+proc that would be why still once you get later into your run the sheer number of elites will enable brain stocks uptime to be near permanent and at the
+very least it will be up when you need it most next brilliant behemoth you can think of this as sixty percent more damage if you'd
+like but technically it only applies to things with an above zero proc coefficient meaning damage over times and your precious fire
+and ice bands do not receive the damage increase still the vast majority of hits do get the benefit of the behemoth making it an
+extremely powerful item to get at any point next resonance disk while not as lucrative as its bigger brother the ceremonial
+daggers resonance disc still packs quite the punch in dealing with anything less than the teleporter boss itself even so you
+can still get some pretty nutty disc procs that absolutely one shot everything in their path definitely deserves the a-rank next
+unstable tesla coil once you get a tesla you never have to worry about these small enemies again lesser wisps lumerians imps all of
+those guys are rendered obsolete immediately it's also pretty good for general damage but the main purpose is to keep your
+screen clear of the lesser distractions and keep you focused on the big ones lastly hard light afterburner on the
+loader and captain yup you bet your little butt that it gets an s rank but for everybody else the a tier is where
+the hard light belongs for the majority of survivors their utility ability is important for maneuvering around the map
+and dodging threats and obviously doing more of that is a great thing for the loader and captain basically their entire identity revolves
+around their utilities and thus the item is more potent on them alright now for s tier starting with none other than the
+57 leaf clover again as i mentioned the clover and purity are the only two items that modify your luck stat clover does
+so in a positive manner for each point of luck meaning for each clover that you have all of your items effects except
+for teddy bears are rolled again if they do not result in a positive outcome for most examples this would mean if whatever the chance
+something has to happen is not met so an atg's 10 chance to fire the clover will then re-roll that chance
+and hope that it is met to calculate the odds of something happening with the clover simply take the chance of it
+not happening and in the case of the atg that would be a 90 chance to not fire and multiply it by
+itself don't worry there's a whole wiki page on this stuff if you want more examples i'm not gonna stay here all day
+to explain it in fact i'm gonna make a separate video on the topic of clover versus purity in the next couple weeks so look out for that to summarize clover
+is the best item in the game there are so many effects related to chance in this game and the clover gets
+better the more of those chances you have i should note here quickly that the clover does not affect loot obtained in any way
+shape or form period well except for lunar coins but hey that would have been less dramatic to include okay next ceremonial daggers these puppies
+still reign king over the dominion that is on kill effects nothing can even compare to the heat seeking daggers that fly out
+and are able to proc your other items on top now they do require a bit of scaling to probably enter the entire screen
+death phase but that scaling isn't much so long as you have some on hit items crit chance or other means of damage
+your daggers will reward you greatly next re-juvrac it doubles all of your healing yes
+all of it next cinti and midho this thing is like the ukulele on steroids remember how important ukuleles
+were to proc chaining and how important proc chaining is in general yup this guy just takes all of that and does it even
+better in fact when you do get a meat hook it's almost guaranteed to be after a ukulele save for some absolutely nutty rng on your end
+and it's like you've never even experienced proc chains before once you get it lightning bolts and hooks will start flying out on every single enemy
+not to mention any other on hits you have no i'm not exaggerating in fact i would say meat hooks are right behind the
+clover as the second best item in the entire game next shattering justice the only enemies in the game to have armor are bosses and
+scavengers with the default value being 20 so reducing 60 armor is quite potent if you play
+league of legends the damage that armor mitigates follows the same formula exactly so picture entirely
+negating a chain vest and ninja tabby malphite's armor yeah that's about the same level of damage you're getting versus things with
+a shattering justice lastly soulbound catalyst reducing the cooldown of your equipment by 4 seconds it's powerful enough on its own
+especially when paired with the lower cooldown equipment like royal capacitor and missile launcher but to get that every single kill
+and hey you should be using your equipment for damage anyway meaning you'll already be killing stuff with it and thus the sole bonds effect can
+cascade very quickly to provide some insane value moving on now to the next tier boss items starting in d with
+pearls kind of an odd way to start the boss items as these things don't actually drop from any boss and rather they're
+from the cleansing pools interactable which is essentially a 3d printer for lunar items still it's yellow so therefore in the boss
+category 10 hp is not much of a gain when trading in a lunar item especially because you know
+you kind of picked up that lunar item intentionally so yeah the regular pearl gets deter next
+queen's gland with the addition of the new boss items queen's gland just isn't as desirable anymore not that it
+really was to begin with the pet beetle doggo that follows you around is cute sure but it lacks damage once
+you reach stage three and other than that is like a walking bullet sponge that ends up jumping off cliffs more than actually doing anything useful for
+you moving on to sea tier starting with genesis loot similar to the left on daisy yes this thing has saved my life
+multiple times however its effect is too inconsistent to warrant a higher rank but really once
+you be slow speed it always goes off and that's the definition of stop right there nope when i mentioned consistency i mean the rate at which
+something actually happens how often do you get low enough for the loop to proc and in such a scenario how often does
+the loop do something that you otherwise couldn't as in how often does it truly wipe your screen and take out threats
+that would have killed you instantly rarely at best most of the time i'll just get smacked by a golem go down to 10 hp thanks one
+shot protection and be like oh cool now i don't have to kill things outright and let the baker wiener took him out that's convenient
+next halcyon c man oh man do i wish the aurelia knight we got was cooler than he is i mean he is cool already just not
+useful he's like a bigger beetle guard and that's about all i have to say lastly little disciple this effect is
+very similar to nukahana's opinion and that you fire some heat seeking shots out that don't deal a ton of damage the
+difference is that the little disciple activates just by you running around and nothing else however while it's
+consistent the effect itself is rather weak and doesn't do much damage to change the tides of your run
+especially when compared to other yellows and greens remember the boss items can only drop from the teleporter event and thus they compete directly
+with greens moving on to b tier we have the first new boss item molten perforator against larger targets
+and stationary ones especially the perforator performs quite well but against anything less the cone
+pattern that the projectiles spew out of makes it wildly inconsistent on top of that if the shots
+do land they deal negligible damage and inflict a weak burn still it's a cool item to get and you can get some good
+value out of it just again compared to others it's not anything special lastly titanic neural
+it gives flat hp and hp region both are useful but the main draw is definitely the region
+as your base amount on monsoon is so low that a single neural within the first loop increases your ability to take chip
+damage small hits here and there by a significant margin definitely a pleasant sight to see as the boss reward moving
+up there's only one item here in a tier and it's another new one the mired urn it essentially gives you a
+clean dune strider suck attaching to one enemy per stack and slowing them while healing yourself the amount you heal is
+based on the damage you deal so once you get some crit chance you'll essentially double the healing of the suck quite a nice effect to have and
+finally the s-tier boss items starting with the irradiant pearl again the pearls aren't really boss items but who
+cares it's a yellow item the irradiant pearl gives a 10 increase to all of your stats rather
+than just your hp this includes hp hp region crit armor damage attack speed and movement speed yeah that's a little
+better than just 10 hp right as far as yellow items come it's about as good as it gets however the chance to acquire one is
+low in fact so astronomically low that in my over 700 hours and countless runs since the
+cleansing pools were released i have gotten exactly zero irradiance there is a four percent chance that a cleansing pool contains an
+irradiant pearl instead of a regular one so you take that and the fact that you need to find a pool in the first place and yup
+it's pretty tarn rare lastly and the real boss item here shattersplain holy moly this thing is
+nuts it applies a guaranteed bleed for every crit that you deal yes this means things that fire multiple shots such as
+huntress's flurry or captain shotgun each shot will apply a bleed and if that wasn't enough enemies that are bleeding
+explode on death dealing damage based on your damage and their max hp and if that was enough the bleed
+is completely separate from tri tips meaning if you already have capped bleed it doesn't matter you're just applying two bleeds
+for every hit at that point instead of one absolutely bonkers item and well deserving of best here alright moving on now to lunar
+items starting in d tier with the corpse bloom i have an entire video dedicated to this item and by gosh i've already been
+writing this script for too long already so go watch that video if you want all the details on it in short take a coarse blue if you plan on doing obliteration
+runs or fighting the final boss on stage six specifically on stage six in all other cases avoid this item like the
+plague as it will shaft your overall healing completely lastly the new edition of purity as i said before i will be making
+a separate video covering purity and the clover in depth but until then i'm giving it a d rank as the
+downside of being a reverse clover you know the polar opposite of the literal best item in the entire game is not worth the upside of shaving a mere
+two seconds off of your cooldowns except on artificer loader and accurate man if you haven't tried this thing out on those
+survivors you need to as their playstyles exclusively revolve around waiting for their abilities to come off
+of cooldown and they scale poorly with attack speed and the usual on-hit proc chain meta so those two reasons combined
+as well as the band changes making them not affected by luck makes the purity actually an extremely
+strong lunar on those three specifically i'd give it an s other than that though yeah don't take this thing moving on now to sea
+tier starting with mercurial rockies this is a new lunar item that periodically drops a little spine
+looking thing in a random area that grants anything inside of it increased damage the randomness of its placement coupled
+with the fact that everything gets the damage bonus means that its uses are limited at best but hey that's kind of a
+whole point of lunars in the first place right you only take them for specific reasons next shaved glass this one pains me
+quite a bit the item itself was untouched with the update however its effect on the player was not long story
+short if you are under a curse of at least 10 curses reduce your maximum hp by their amount then your one shot protection is
+removed entirely meaning yes taking just a single stack of shaped glass with its
+50 curse means you lose your one shot protection entirely you can still get away with one
+maybe two stacks of it in a regular run and you can still stack it like crazy and go for the whole if i either sneeze
+on you or you sneeze on me we're both dead approach but the days of stacking glass for a free win are now
+gone sad times indeed next strides of heresy still a solid option for utility on some survivors but i don't quite find
+the effect useful enough to warrant dropping my already existing skill in its place try it out and see if you like it but
+it's not a great item either way next transcendence similar to strides try it out a few times and see if the shield
+based gameplay is more of your style than welling on things to recover hp remember shields begin to recharge after seven seconds
+and they take an additional two seconds to fill completely meaning you'll need to be in the habit of running around and hiding when reaching dangerous hp levels
+of course that's kind of the whole point with transcendence to avoid getting that low of hp in the first place by reaching some insane
+amounts but be warned enemies never stop scaling they will catch up to you and if you do make that one mistake you're
+still just as dead as someone who did not take 15 stacks of transcendence lastly visions of heresy again
+similar to both transcendence and strides it's more of a side grade than anything it's useful on some survivors
+who lack a consistent primary but i prefer everyone else's primary over it and yes if you take it on the captain in his
+current state it will grant you 12 shots of your orbital strike but this is a bug and confirmed to be fixed with the next
+update it is not an intended mechanic moving on to b tier starting with brittle crown yikes
+the crown is higher than shaved glass what a time to be alive you've heard it before but man this thing has grown on me quite a
+bit maybe it's just my play style but whenever i pick this thing up in the early game i often find myself with far more money than i usually have if
+you're a relatively aggressive player and are still learning the ropes and identifying threats in a fast manner then i'd recommend to avoid this item as
+even taking the smallest amount of damage will drain your gold quickly but if you're pretty comfortable with the game and have been steering clear of the
+crown give it a shot it may surprise you lastly another new lunar the defiant gouge this thing is
+awesome it essentially spawns a combat shrine's worth of monsters every time you interact with any shrine
+blood mountain chance order heck even other combat shrines will give you a group of baddies to take down the reason i'm
+giving it a b however is due to the fact that it scales poorly very poorly as in you do
+not want it in your inventory past the first loop early on it is a godsend to get multiple combat shrines
+per stage and it will drastically speed those stages up however once you get to the point where monsters are already spawning out the
+butt and combat shrine spawn scavengers overloading worms are a pack of overloading elder lumerians yeah you can probably see the issue
+still you should definitely try the gouge out early on moving on now to a tier starting with beads of fealty the
+effect is extremely vague in fact there's no way you could possibly figure out what it's supposed to do just by
+reading it grabbing a beads grants you access to a special boss fight upon obliteration at the celestial obelisk
+you fight at random one of four preset lunar scavengers and upon their defeat you get 15
+lunar coins instead of the usual five but if you fail you get nothing pretty cool item and definitely worth the coins
+to grab if your goal is to just go as long as possible and not stop at the final boss lastly focused convergence
+it speeds up your teleporter on every single stage need i say more yes actually while the charge time
+is reduced so is the area you charge within this is hard capped at three stacks so
+never take more than three else you're wasting your hard earned lunar coins at three stacks the tp area
+is so small that you'll be entirely outside of it after pressing your movement key like once or twice in any direction kinda
+hard to find magma worms and imp overlords in that small of an area let alone everything else that spawns
+still a pretty good item to take just a single stack of and save quite a bit of
+now for s tier and the final lunar gesture of the drowned there's no competition
+for the gesture because it just does not have a downside activating your equipment off cooldown may be an issue in select few cases such
+as having a prey on and completely missing the shot which i would never do that but for the most part automatic activation is
+amazing to have and oh it also gives you less cooldown yeah the gesture is unlike literally all other lunar items with its distinct
+lack of choice as in if you see it you get it period we've made it finally to the last category of
+rankings equipment i'm including both regular and lunar equipment in the same rankings as you only have one equipment slot
+regardless of type before we begin i want to quickly discuss the elite aspects which technically are equipment since they do
+occupy your slot but are actually more like regular items due to only having passive effects i have a separate video covering the
+details on each aspect but the gist of it is that none of them are worth your equipment slot but if you really
+really wanted to take one take the lightning one silence between two strikes but you really should get an actual
+equipment instead of the aspects i know they're rare i know i know believe me i know you don't don't do it okay let's start with the
+actual equipment here an f tier yes this is the first f rank coming in hot the radar scanner
+just use your eyeballs to find the loop sure if you get it and see an equipment drone toss it over to it so it can use
+it twice before it dies and loses it permanently go ahead and have a blast it doesn't change the fact that it's a complete waste of your equipment slot
+next and last the spindle tonic now what wait hold on there partner spinal tonic only gets an f if you have no additional
+effects on your equipment so no fuel cells no sobond catalyst and no gesture of the drown if you have any number of those things
+it gets significantly better the downside of receiving an affliction is just far too dangerous to be gambled with and
+thus i recommend to avoid it until you get at least a couple of any cooldown reducing effects to decrease the time that you have to
+play with those afflictions i probably should have mentioned beforehand that the afflictions are negated while you're under the influence of the tonic
+permanent uptime is achievable actually quite easily with one gesture and at least three fuel cells or additional gestures and in
+cases where you have permanent uptime i give tonic an a not an s because once you have the permanent
+uptime there's no additional benefit you can get from it which is not the case for other equipments like
+the royal capacitor moving on to d tier starting with blast shower you won't be inflicted with too many debuffs
+to warrant sacrificing your damage equipment for your blast hour however if you have nothing else i guess
+it's kind of useful it's actually kind of ironic that the best use i can think of for the blast hour is to reset the
+cooldown of your ice and fire bands because that 10 second window actually counts as a debuff for whatever
+reason you can get some pretty wild shenanigans going with a perma-uptime blast shower and multiple stacks of each band maybe give that a shot instead of
+using it to you know actually cleanse ignites and stuff next eccentric vase it creates a little zip line from
+yourself to your target that you can diverse quite quickly however the time saved by using it to get across a map is not worth the equipment slot in any
+situation that i can think of there are much better options next effigy of grief while it was
+updated in the current patch to now be thrown wherever you are looking and thank god for that and you no longer have to go and
+retrieve it afterwards as it has five uses per stage those changes were not enough to warrant its use over other
+equipments yes you'll be hearing that line a lot more next glowing meteorite uh if you want to
+troll your teammates and honestly troll yourself too grab this thing and watch the ensuing chaos that follows otherwise
+can you guess what i'm gonna say huh can you take something else next the backup it's way better on captain than on everybody else but it's
+still not that good even on him the drones do inherit his passive but they deal no damage and they are there
+solely to draw attention off of you just pick something up i got you again no but i'm serious pick something else
+next the crowdfunder 100 damage per shot is extremely low even if you do have a crazy amount of
+on-hit items to scale it with yes the bleed changes makes this a more lucrative option on paper but in reality
+if you're already at the point of applying a stupid amount of bleed you probably don't need the crowdfunder to help you with that
+take something else lastly forgive me please this is another new addition to the arsenal of items and equipment and
+while its theme is awesome its actual effectiveness is low now yes the more on kill items you
+receive such as will of the wisp ceremonial daggers gore stones etc the better this becomes but due to its small impact area and
+pure reliance on your on kill effects unless you have crazy amounts of them it's just not that useful
+if you do have crazy amounts of on kills then i would give it an a or even an s depending on the level of
+crazy but in the majority of your runs it's not going to do anything that another damaging equipment couldn't
+already do but better moving on to sea tier starting with foreign fruit it's kind of
+like a lepton daisy but an equipment form it can save you but chances are if you had another equipment maybe one that
+actually deals damage and takes care of threats you probably wouldn't have been in such a situation to begin with next
+hellfire tincture i'm putting it here in c tier because it was buffed but there are too many variables to pull an effective
+use off of a hellfire are you melee if not why do you even have this thing instead of something else with range okay you are melee how much mobility do
+you have can you get up to that magma worm elite greater wisp or worship unit no oh well uh just take these lemurians out
+instead okay what you could have done that with a pray on nah don't be silly ting shure all day baby i apologize for
+my growing levels of sarcasm you do not want to know how long i've been here writing the script and i can see the end of it in my site so i'm just booking it
+forward okay next jade elephant it gives you a whopping 500 armor which is an over 80 damage
+reduction which is pretty thick but again if you had a damaging equipment would you need the defense it provides
+probably not lastly volcanic egg the mobility the egg provides is actually pretty useful especially early on but it lacks damage
+and can actually end up getting you killed as you fly through enemies would not recommend versus amp overlords moving on to b-tier starting with
+disposable missile launcher it deals some solid damage but its target acquisition ends up shafting you more
+often than not it's a decent choice but definitely outclassed by others next milky chrysalis the changes to chrysalis
+were actually pretty dang strong and it's not a terrible choice for your equipment slot early on before you get tons of fuel cells and other equipment
+related items however once you reach such a point invest in those damaged stonks for sure next ocular hud
+again a solid choice early on but only until you reach a decent amount of crit once you're at 40 or more i would
+recommend dropping the ocular if not sooner than that for something else because the more crit you have the less impactful it becomes
+next primordial cube grabbing things and pulling them all to the same location is useful sure especially if that
+location is off of a cliff but its effect is avoided entirely by bosses and even some other high threat enemies like
+parents and imps who will simply teleport out of its area still not a bad choice if you want to clump and dump as
+they do call it i really hope no one calls it that next summering lead change is good zombo rings no not that good a few stacks of
+bleed on a boss past the first four stages is not going to do much the real benefit of the submarine comes from its
+shotgun effect of slapping a target with all the blades at once and surprise surprise there are better choices for
+raw damage the blades will also completely stop and fall to the ground if they even nick the smallest of terrain making it a
+bad choice for those close range encounters near walls and such lastly the newly added super massive
+leech aside from the mired urn which doesn't really count anyway the supermassive leach is currently the only form of
+damage based healing that we have and it's a pretty darn good one at that you heal instantly for 20 of all of your
+damage over the next eight seconds this makes it a great tool to use when you've yet to acquire a lot of healing otherwise
+if you're near cap or totally capped crit and you have just a couple sights it's not worth taking a super massive
+leech beyond such a point moving on now to a tier starting with gnarled woods right with the changes to difficulty scaling
+there are quite a few more monsters looking around once you get past the first few stages so the wood sprites continual healing
+plus the burst on activation can prove extremely useful to have in some high threat situations
+accidentally step on a magma worm no problem wood spikes got you back next the newly added gorax opus
+hugely increased movement and attack speed for all allies for the entire duration regardless of where they are on
+the map sounds pretty good to me it's worth noting here that this item is bugged on the captain specifically and only in single players it has zero
+effect so hopefully that gets fixed pretty soon next the preon accumulator the time old classic returns and retains
+the a rank there is no better tool than the prion to wipe out large groups of enemies and singular threats alike the
+only thing keeping it from an s rank is its 140 second cooldown which is the longest in the entire game getting to
+stage 3 by 10 minutes is absolutely still a viable option in hopes that you get rally point delta for
+this big chunk of 7 equipment lastly recycler the ability to re-roll your teleporter drop every stage at a bare minimum but more
+importantly any random reds you come across and especially the guaranteed reds of abyssal depths and sirens call
+makes the recycler a very solid choice of an equipment this and the wood sprite are the two exceptions to my quite
+arbitrary rule of equipment need to deal damage we've made it the final ranking of the entire list and
+boy what a send-off it is royal capacitor this is the only s-tier equipment in my mind because it's just
+that far ahead of everything else sure it got a slight delay with the artifacts 2.0 update but that was more of a change
+for scavengers and that literally just does not matter i maybe miss one shot for every 30 or so that i pump
+out and oh no what am i going to do for a whole 20 seconds while i wait for it to come off the cooldown i'm assuming i've gotten literally nothing to eight
+it's cool cooldown recovery in my run this far you just cannot beat three thousand percent damage on a 20-second cooldown
+and that does it for the complete item and equipment tier list for risk of rain two's full release
+remember there is a spreadsheet version in the description below if you want an easier to follow display of the list what did you think of the list you are
+undoubtedly going to have at least one different opinion than me so let me know with a comment below and a like or
+dislike on the video you can check out my stream at twitch.tv gaming consider joining our discord
+server as well thank you for watching and be on the lookout for my best loadouts and survivor tier list videos
+coming in

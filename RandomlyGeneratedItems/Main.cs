@@ -58,6 +58,8 @@ namespace RandomlyGeneratedItems
 
             Buffs.Awake();
 
+            NameSystem.populate();
+
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
             int maxItems = Config.Bind("Configuration:", "Maximum Items", 100, "The maximum amount of items the mod will generate.").Value;
 
@@ -274,8 +276,8 @@ namespace RandomlyGeneratedItems
             {
                 var prefixRng2 = rng.RangeInt(0, NameSystem.itemNamePrefix.Count);
                 var nameRng2 = rng.RangeInt(0, NameSystem.itemName.Count);
-                var logRng2 = rng.RangeInt(0, NameSystem.logDesc.Count);
-                var logLengthRng2 = rng.RangeInt(10, 60);
+                /* var logRng2 = rng.RangeInt(0, NameSystem.logDesc.Count);
+                var logLengthRng2 = rng.RangeInt(10, 60); */
                 itemName = "";
                 logEntry = "";
 
@@ -288,14 +290,14 @@ namespace RandomlyGeneratedItems
                 xmlSafeItemName = itemName.ToUpper();
                 xmlSafeItemName = xmlSafeItemName.Replace(" ", "_").Replace("'", "").Replace("&", "AND");
 
-                for (int i = 0; i < logLengthRng2; i++)
+                /* for (int i = 0; i < logLengthRng2; i++)
                 {
                     logEntry += NameSystem.itemNamePrefix[logRng2] + " ";
                     if (i % 12 == 0)
                     {
                         logEntry += ".";
                     }
-                }
+                } */
 
                 Effect buffer;
                 if (map.TryGetValue("ITEM_" + xmlSafeItemName + "_NAME", out buffer))
@@ -311,6 +313,19 @@ namespace RandomlyGeneratedItems
             if (attempts > 5)
             {
                 return;
+            }
+
+            int logLength = rng.RangeInt(0, 120);
+            string log = "";
+            for (int i = 0; i < logLength; i++) {
+                int logRng = rng.RangeInt(0, NameSystem.logDesc.Count);
+                log += NameSystem.logDesc[logRng];
+                if (i % rng.RangeInt(8, 14) == 0) {
+                    log += ". ";
+                }
+                else {
+                    log += " ";
+                }
             }
 
             tier = (ItemTier)rng.RangeInt(0, 3);
@@ -349,7 +364,7 @@ namespace RandomlyGeneratedItems
             for (int i = 0; i < objects; i++)
             {
                 GameObject prim = GameObject.CreatePrimitive(prims[rng.RangeInt(0, prims.Length)]);
-                prim.GetComponent<MeshRenderer>().material.color = colors[rng.RangeInt(0, colors.Length)];
+                prim.GetComponent<MeshRenderer>().material.color = new Color32((byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256));
                 prim.transform.SetParent(first.transform);
                 prim.transform.localPosition = new Vector3(rng.RangeFloat(-1, 1), rng.RangeFloat(-1, 1), rng.RangeFloat(-1, 1));
                 prim.transform.localRotation = Quaternion.Euler(new Vector3(rng.RangeFloat(-360, 360), rng.RangeFloat(-360, 360), rng.RangeFloat(-360, 360)));
@@ -369,7 +384,7 @@ namespace RandomlyGeneratedItems
 
             float scale = rng.RangeFloat(1, 1);
 
-            Color color = colors[rng.RangeInt(0, colors.Length)];
+            Color color = new Color32((byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256));
             Color tierCol;
 
             switch (tier)
@@ -392,7 +407,7 @@ namespace RandomlyGeneratedItems
                     tierCol = Color.red;
                     translatedTier = "Legendary";
                     mult = 12f;
-                    stackMult = 0.2f;
+                    stackMult = 1f;
                     break;
 
                 case ItemTier.Lunar:
@@ -477,7 +492,7 @@ namespace RandomlyGeneratedItems
             LanguageAPI.Add(itemDef.nameToken, itemName);
             LanguageAPI.Add(itemDef.pickupToken, effect.description);
             LanguageAPI.Add(itemDef.descriptionToken, effect.description);
-            LanguageAPI.Add(itemDef.loreToken, logEntry);
+            LanguageAPI.Add(itemDef.loreToken, log);
 
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
             myItemDefs.Add(itemDef);

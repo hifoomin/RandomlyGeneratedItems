@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace RandomlyGeneratedItems
 {
@@ -127,5 +129,19 @@ namespace RandomlyGeneratedItems
             "With", "or", "without", "a", "choice", "To", "confront", "every", "vice", "without", "a", "voice", "Dont", "deny", "your", "will", "to", "live", "is", "shattered", "and", "your", "hope", "is", "a", "jaded", "lie", "The", "quality", "within", "will", "shape", "the", "path", "we", "choose", "All", "this", "time", "to", "call", "the", "things", "they", "did", "a", "lie", "Keep", "it", "to", "yourself", "so", "i", "can", "shove", "the", "dark", "aside", "and", "i", "wont", "have", "to", "Tear", "the", "honesty", "from", "everything", "we", "used", "to", "be", "again", "The", "quality", "within", "will", "shape", "the", "path", "we", "choose", "The", "quality", "we", "loose", "will", "form", "the", "grave", "we", "use", "Legions", "are", "sent", "from", "the", "negative", "elite", "sucking", "life", "from", "the", "world", "we", "live", "Shading", "the", "knowledge", "of", "oneness", "and", "feeding", "the", "shadow", "within", "the", "abyss", "Found", "internally", "Strength", "to", "change", "our", "misery", "Shining", "light", "carves", "the", "way", "for", "their", "demise", "Dissecting", "the", "patterns", "in", "our", "own", "lives", "to", "sift", "love", "from", "experience", "Remember", "why", "we", "have", "come", "Silently", "ascending", "Heeding", "the", "universal", "call", "as", "we", "grow", "The", "shadow", "cast", "is", "nearing", "its", "retreat", "We", "are", "now", "in", "the", "time", "of", "the", "fall",
             // extra/icarus
         };
+
+        public static void populate() {
+            if (File.Exists(System.Reflection.Assembly.GetExecutingAssembly().Location.Replace("RandomlyGeneratedItems.dll", "lore.txt"))) {
+                string fullText = File.OpenText(System.Reflection.Assembly.GetExecutingAssembly().Location.Replace("RandomlyGeneratedItems.dll", "lore.txt")).ReadToEnd();
+                fullText.Replace("\n", "");
+                string[] newText = fullText.Split(" ".ToCharArray()[0]);
+                foreach (string str in newText) {
+                    logDesc.Add(str);
+                }
+            }
+            else {
+                Main.RGILogger.LogError("Could not find lore text file at path: " + System.Reflection.Assembly.GetExecutingAssembly().Location.Replace("RandomlyGeneratedItems.dll", "lore.txt"));
+            }
+        }
     }
 }
