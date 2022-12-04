@@ -288,6 +288,10 @@ namespace RandomlyGeneratedItems
         public ConditionCallback notMoving;
         public ConditionCallback underHalfHp;
         public ConditionCallback atFullHp;
+        public ConditionCallback midair;
+        public ConditionCallback debuffed;
+        public ConditionCallback firstXSeconds;
+        public ConditionCallback tpEvent;
 
         // stateffect callbacks
         public StatEffectCallback attackSpeedBoost;
@@ -349,6 +353,30 @@ namespace RandomlyGeneratedItems
             atFullHp = (body) =>
             {
                 return body.healthComponent.combinedHealthFraction >= 1f;
+            };
+
+            midair = (body) =>
+            {
+                return body.characterMotor.lastGroundedTime >= Run.FixedTimeStamp.now + 0.2f;
+            };
+            debuffed = (body) =>
+            {
+                foreach (BuffIndex index in body.activeBuffsList)
+                {
+                    if (BuffCatalog.GetBuffDef(index).isDebuff) return true;
+                }
+                return false;
+            };
+
+            firstXSeconds = (body) =>
+            {
+                return Stage.instance ? Run.instance.fixedTime - Stage.instance.entryTime.t <= 120 : false;
+            };
+
+            tpEvent = (body) =>
+            {
+                if (TeleporterInteraction.instance) return TeleporterInteraction.instance.isCharging;
+                return false;
             };
 
             // stateffect callbacks
@@ -513,7 +541,8 @@ namespace RandomlyGeneratedItems
             };
 
             // on kill callbacks
-            OnKillCallback projOnKill = (DamageInfo info, int stacks) => {
+            OnKillCallback projOnKill = (DamageInfo info, int stacks) =>
+            {
                 CharacterBody body = info.attacker.GetComponent<CharacterBody>();
                 FireProjectileInfo proj = new()
                 {
@@ -531,7 +560,8 @@ namespace RandomlyGeneratedItems
                 ProjectileManager.instance.FireProjectile(proj);
             };
 
-            OnKillCallback healOnkill = (DamageInfo info, int stacks) => {
+            OnKillCallback healOnkill = (DamageInfo info, int stacks) =>
+            {
                 CharacterBody body = info.attacker.GetComponent<CharacterBody>();
                 HealthComponent com = body.healthComponent;
                 float increase = (healOrBarrier * 0.01f * 3) * (stacks * stackMult * 3);
@@ -585,7 +615,8 @@ namespace RandomlyGeneratedItems
                 {ooc, "While <style=cIsUtility>out of combat</style>, "},
                 {ood, "While <style=cIsUtility>out of danger</style>, "},
                 {underHalfHp, "While below <style=cIsHealth>50% health</style>, "},
-                {atFullHp, "While at <style=cIsHealth>full health</style>, "}
+                {atFullHp, "While at <style=cIsHealth>full health</style>, "},
+                {midair, "While <style=cIsUtility>midair</style>, " }
             };
 
             onHurtMap = new() {
@@ -636,7 +667,8 @@ namespace RandomlyGeneratedItems
                 moving,
                 notMoving,
                 underHalfHp,
-                atFullHp
+                atFullHp,
+                midair
             };
 
             onHitCallbackList = new()
