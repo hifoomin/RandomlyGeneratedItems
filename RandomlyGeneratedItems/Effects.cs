@@ -428,22 +428,22 @@ namespace RandomlyGeneratedItems
 
             secondaryCdrBoost = (args, stacks, body) =>
             {
-                args.secondaryCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
+                args.secondaryCooldownMultAdd -= statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             utilityCdrBoost = (args, stacks, body) =>
             {
-                args.utilityCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
+                args.utilityCooldownMultAdd -= statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             specialCdrBoost = (args, stacks, body) =>
             {
-                args.specialCooldownMultAdd += statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
+                args.specialCooldownMultAdd -= statIncrease * 0.7f * (stackMult * stacks) * 0.01f;
             };
 
             allSkillCdrBoost = (args, stacks, body) =>
             {
-                args.cooldownMultAdd += statIncrease * 0.4f * (stackMult * stacks) * 0.01f;
+                args.cooldownMultAdd -= statIncrease * 0.4f * (stackMult * stacks) * 0.01f;
             };
 
             // on hit callbacks

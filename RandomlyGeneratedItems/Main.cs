@@ -19,7 +19,7 @@ namespace RandomlyGeneratedItems
 
         public const string PluginAuthor = "HIFUPulse";
         public const string PluginName = "RandomlyGeneratedItems";
-        public const string PluginVersion = "0.0.2";
+        public const string PluginVersion = "0.0.3";
 
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
@@ -67,7 +67,7 @@ namespace RandomlyGeneratedItems
             NameSystem.populate();
 
             // int maxItems = itemNamePrefix.Count < itemName.Count ? itemNamePrefix.Count : itemName.Count;
-            int maxItems = Config.Bind("Configuration:", "Maximum Items", 100, "The maximum amount of items the mod will generate.").Value;
+            int maxItems = Config.Bind("Configuration:", "Maximum Items", 30, "The maximum amount of items the mod will generate.").Value;
 
             On.RoR2.ItemCatalog.Init += ItemCatalog_Init;
 
