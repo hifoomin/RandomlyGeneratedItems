@@ -148,11 +148,11 @@ namespace RandomlyGeneratedItems
         {
             conditions = rng.nextBool;
             // num1 = Mathf.Ceil(rng.RangeFloat(5f, 15f) * tierMult);
-            damage = Mathf.Ceil(rng.RangeFloat(100f, 170f) * tierMult);
-            statIncrease = Mathf.Ceil(rng.RangeFloat(7f, 15f)) * tierMult;
-            chance = Mathf.Ceil(rng.RangeFloat(4f, 13f) * tierMult);
-            healOrBarrier = Mathf.Ceil(rng.RangeFloat(1f, 5f) * tierMult);
-            speedOrBleed = Mathf.Ceil(rng.RangeFloat(0, 3f) * tierMult);
+            damage = Mathf.RoundToInt(rng.RangeFloat(100f, 170f) * Mathf.Sqrt(tierMult));
+            statIncrease = Mathf.Round(rng.RangeFloat(7f, 15f)) * tierMult;
+            chance = Mathf.RoundToInt(rng.RangeFloat(4f, 13f) * tierMult);
+            healOrBarrier = Mathf.Round(rng.RangeFloat(1f, 5f) * tierMult);
+            speedOrBleed = Mathf.Round(rng.RangeFloat(0.5f, 3f) * tierMult);
 
             if (conditions)
             {
@@ -162,6 +162,11 @@ namespace RandomlyGeneratedItems
                 chance += Mathf.RoundToInt(rng.RangeFloat(1f, 1.5f) * Mathf.Sqrt(tierMult));
                 healOrBarrier += Mathf.Round(rng.RangeFloat(0.3f, 1f) * Mathf.Sqrt(tierMult));
                 speedOrBleed += Mathf.Round(rng.RangeFloat(0.2f, 0.5f) * Mathf.Sqrt(tierMult));
+            }
+
+            if (chance >= 100f)
+            {
+                chance = 100;
             }
 
             // buff = BuffCatalog.buffDefs[rng.RangeInt(0, BuffCatalog.buffDefs.Length)];
@@ -370,7 +375,7 @@ namespace RandomlyGeneratedItems
 
             firstXSeconds = (body) =>
             {
-                return Stage.instance ? Run.instance.fixedTime - Stage.instance.entryTime.t <= 120 : false;
+                return Stage.instance ? Run.instance.fixedTime - Stage.instance.entryTime.t <= 180 : false;
             };
 
             tpEvent = (body) =>
@@ -573,12 +578,12 @@ namespace RandomlyGeneratedItems
             /// generate maps
             onhitmap = new()
             {
-                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{damage * 2}%</style> <style=cStack>(+{damage * stackMult * 2}% per stack)</style> <style=cIsDamage>base damage</style>."},
+                {fireProjectile, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to fire a {projectileName} for <style=cIsDamage>{damage }%</style> <style=cStack>(+{damage * stackMult}% per stack)</style> <style=cIsDamage>base damage</style>."},
                 {applyBleed, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to <style=cDeath>bleed</style> a target for <style=cIsUtility>{speedOrBleed} seconds</style>."}
             };
 
             onKillEffectMap = new() {
-                {projOnKill, $"On kill, fire a {projectileName} for <style=cIsDamage>{damage*0.5f}%</style> <style=cStack>(+{damage*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."},
+                {projOnKill, $"On kill, fire a {projectileName} for <style=cIsDamage>{damage*2f}%</style> <style=cStack>(+{damage*stackMult*2f}% per stack)</style> <style=cIsDamage>base damage</style>."},
                 {healOnkill, $"Receive <style=cIsHealing>healing</style> equal to <style=cIsHealing>{healOrBarrier * 0.1f * 3}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.1f * 3}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon <style=cIsHealing>killing an enemy</style>"}
             };
 
@@ -616,12 +621,16 @@ namespace RandomlyGeneratedItems
                 {ood, "While <style=cIsUtility>out of danger</style>, "},
                 {underHalfHp, "While below <style=cIsHealth>50% health</style>, "},
                 {atFullHp, "While at <style=cIsHealth>full health</style>, "},
-                {midair, "While <style=cIsUtility>midair</style>, " }
+                {midair, "While <style=cIsUtility>midair</style>, " },
+                {debuffed, "While <style=cIsHealth>debuffed</style>, " },
+                {firstXSeconds, "For the first <style=cIsUtility>3 minutes</style> every stage, " },
+                {tpEvent, "During the <style=cIsUtility>Teleporter Event</style>, " }
             };
 
-            onHurtMap = new() {
+            onHurtMap = new()
+            {
               {retaliateProjectile, $"Upon <style=cDeath>taking damage</style>, fire a {projectileName} for <style=cIsDamage>{damage}%</style> <style=cStack>(+{damage*stackMult}% per stack)</style> damage."},
-              {speedBonus, $"Upon <style=cDeath>taking damage</style>, gain a <style=cIsUtility>speed boost</style> for <style=cIsDamage>{speedOrBleed}</style <style=cStack>(+{damage * stackMult}% per stack)</style> seconds."}
+              {speedBonus, $"Upon <style=cDeath>taking damage</style>, gain a <style=cIsUtility>speed boost</style> for <style=cIsUtility>{speedOrBleed}</style> <style=cStack>(+{speedOrBleed * stackMult} per stack)</style> seconds."}
             };
 
             onSkillUseMap = new()
@@ -629,12 +638,14 @@ namespace RandomlyGeneratedItems
                 {fireProjSkill, $"Gain a <style=cIsDamage>{chance}%</style> chance on skill use to fire a {projectileName} for <style=cIsDamage>{damage*0.5f}%</style> <style=cStack>(+{damage*stackMult*0.5f}% per stack)</style> <style=cIsDamage>base damage</style>."}
             };
 
-            healCallbackList = new() {
+            healCallbackList = new()
+            {
                 barrier,
                 bonus
             };
 
-            onKillCallbackList = new() {
+            onKillCallbackList = new()
+            {
                 healOnkill,
                 projOnKill
             };
@@ -655,7 +666,8 @@ namespace RandomlyGeneratedItems
                 allSkillCdrBoost
             };
 
-            onSkillUseCallbackList = new() {
+            onSkillUseCallbackList = new()
+            {
                 fireProjSkill,
             };
 
@@ -668,7 +680,10 @@ namespace RandomlyGeneratedItems
                 notMoving,
                 underHalfHp,
                 atFullHp,
-                midair
+                midair,
+                debuffed,
+                firstXSeconds,
+                tpEvent
             };
 
             onHitCallbackList = new()

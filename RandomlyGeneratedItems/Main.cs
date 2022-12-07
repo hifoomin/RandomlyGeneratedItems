@@ -6,6 +6,7 @@ using R2API.Utils;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace RandomlyGeneratedItems
 {
@@ -37,6 +38,8 @@ namespace RandomlyGeneratedItems
         private static List<ItemDef> myItemDefs = new();
         private static Dictionary<string, Effect> map = new();
 
+        public static Shader hgStandard;
+
         // gonna make the statMult and tierMult configurable later down the line
 
         public void Awake()
@@ -44,6 +47,9 @@ namespace RandomlyGeneratedItems
             RGILogger = Logger;
             RGIConfig = Config; // seedconfig does nothing right now because config.bind.value returns a bepinex.configentry<ulong> instead of a plain ulong???
             seedConfig = Config.Bind<ulong>("Configuration:", "Seed", 0, "The seed that will be used for random generation. This MUST be the same between all clients in multiplayer!!! A seed of 0 will generate a random seed instead");
+
+            hgStandard = Addressables.LoadAssetAsync<Shader>("RoR2/Base/Shaders/HGStandard.shader").WaitForCompletion();
+
             if (seedConfig.Value != 0)
             {
                 seed = seedConfig.Value;
@@ -163,7 +169,8 @@ namespace RandomlyGeneratedItems
                         }
                     }
                 }
-                else {
+                else
+                {
                     if (UnityEngine.Networking.NetworkServer.active && info.attacker)
                     {
                         CharacterBody sender = info.attacker.GetComponent<CharacterBody>();
@@ -339,15 +346,19 @@ namespace RandomlyGeneratedItems
                 return;
             }
 
-            int logLength = rng.RangeInt(0, 120);
             string log = "";
-            for (int i = 0; i < logLength; i++) {
+
+            int logLength = rng.RangeInt(0, 120);
+            for (int i = 0; i < logLength; i++)
+            {
                 int logRng = rng.RangeInt(0, NameSystem.logDesc.Count);
                 log += NameSystem.logDesc[logRng];
-                if (i % rng.RangeInt(8, 14) == 0) {
+                if (i % rng.RangeInt(8, 14) == 0)
+                {
                     log += ". ";
                 }
-                else {
+                else
+                {
                     log += " ";
                 }
             }
@@ -366,6 +377,7 @@ namespace RandomlyGeneratedItems
                 PrimitiveType.Cylinder,
                 PrimitiveType.Cube,
             };
+            /*
             Color32[] colors =
             {
                 // top colors from paint.net with S turned down by 20 and V turned down by 30
@@ -382,9 +394,10 @@ namespace RandomlyGeneratedItems
                 new(38, 38, 38, 255),     // black
                 new(216, 216, 216, 255), // white
             };
+            */
 
             GameObject first = GameObject.CreatePrimitive(prims[rng.RangeInt(0, prims.Length)]);
-            first.GetComponent<MeshRenderer>().material.color = colors[rng.RangeInt(0, colors.Length)];
+            // first.GetComponent<MeshRenderer>().material.color = colors[rng.RangeInt(0, colors.Length)];
             for (int i = 0; i < objects; i++)
             {
                 GameObject prim = GameObject.CreatePrimitive(prims[rng.RangeInt(0, prims.Length)]);
@@ -395,82 +408,112 @@ namespace RandomlyGeneratedItems
             }
 
             GameObject prefab = PrefabAPI.InstantiateClone(first, $"{xmlSafeItemName}-model", false);
+            foreach (MeshRenderer mr in prefab.GetComponents<MeshRenderer>())
+            {
+                mr.sharedMaterial.shader = hgStandard;
+                mr.sharedMaterial.color = new Color32((byte)rng.RangeInt(0, 255), (byte)rng.RangeInt(0, 255), (byte)rng.RangeInt(0, 255), 255);
+            }
+
+            foreach (MeshRenderer mr in prefab.GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.sharedMaterial.shader = hgStandard;
+                mr.sharedMaterial.color = new Color32((byte)rng.RangeInt(0, 255), (byte)rng.RangeInt(0, 255), (byte)rng.RangeInt(0, 255), 255);
+            }
+
             DontDestroyOnLoad(prefab);
 
             Texture2D tex = new(512, 512);
 
             Color[] col = new Color[512 * 512];
 
-            float y = 0.0F;
-
             float sx = rng.RangeFloat(0, 10000);
             float sy = rng.RangeFloat(0, 10000);
 
             float scale = rng.RangeFloat(1, 1);
 
-            Color color = new Color32((byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256));
-            Color tierCol;
+            // Define the color for each item tier
+            Dictionary<ItemTier, Color> tierColors = new()
+            {
+                { ItemTier.Tier1, new Color(0.77f, 0.95f, 0.97f, 0.99f) },
+                { ItemTier.Tier2, Color.green },
+                { ItemTier.Tier3, Color.red }
+            };
+
+            //Color color = new Color32((byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256), (byte)rng.RangeInt(0, 256));
+
+            // Get the color for the item's tier
+
+            Color tierCol = tierColors[tier];
+
+            // Calculate the RGB offset
+            int offset = 40; // This can be adjusted to change the amount of offset
+            int r = (int)Mathf.Clamp(tierCol.r * 255 + offset, 0, 255);
+            int g = (int)Mathf.Clamp(tierCol.g * 255 + offset, 0, 255);
+            int b = (int)Mathf.Clamp(tierCol.b * 255 + offset, 0, 255);
+
+            // Apply the offset to the tier color
+            var color = new Color32((byte)r, (byte)g, (byte)b, 255);
 
             switch (tier)
             {
                 case ItemTier.Tier1:
-                    tierCol = Color.white;
+                    // tierCol = Color.white;
                     translatedTier = "Common";
                     mult = 1f;
                     stackMult = 1f;
                     break;
 
                 case ItemTier.Tier2:
-                    tierCol = Color.green;
+                    // tierCol = Color.green;
                     translatedTier = "Uncommon";
                     mult = 3.2f;
                     stackMult = 0.5f;
                     break;
 
                 case ItemTier.Tier3:
-                    tierCol = Color.red;
+                    // tierCol = Color.red;
                     translatedTier = "Legendary";
                     mult = 12f;
-                    stackMult = 1f;
+                    stackMult = 0.15f;
                     break;
 
                 case ItemTier.Lunar:
-                    tierCol = Color.blue;
+                    // tierCol = Color.blue;
                     translatedTier = "Lunar";
                     mult = 1.8f;
                     stackMult = 0.5f;
                     break;
 
                 case ItemTier.VoidTier1:
-                    tierCol = Color.magenta;
+                    // tierCol = Color.magenta;
                     translatedTier = "Void Common";
                     mult = 0.9f;
                     stackMult = 1f;
                     break;
 
                 case ItemTier.VoidTier2:
-                    tierCol = Color.magenta;
+                    // tierCol = Color.magenta;
                     translatedTier = "Void Uncommon";
                     mult = 1.5f;
                     stackMult = 0.75f;
                     break;
 
                 case ItemTier.VoidTier3:
-                    tierCol = Color.magenta;
+                    // tierCol = Color.magenta;
                     translatedTier = "Void Legendary";
                     mult = 2f;
                     stackMult = 0.45f;
                     break;
 
                 case ItemTier.VoidBoss:
-                    tierCol = Color.magenta;
+                    // tierCol = Color.magenta;
                     translatedTier = "Void Yellow";
                     mult = 2f;
                     stackMult = 0.6f;
                     break;
 
                 default:
-                    tierCol = Color.black;
+                    // tierCol = Color.black;
                     translatedTier = "BRO THIS SHOULDN'T BE HAPPENING";
                     mult = 1f;
                     stackMult = 1f;
@@ -478,7 +521,7 @@ namespace RandomlyGeneratedItems
             }
 
             effect.Generate(rng, mult, stackMult);
-
+            /*
             while (y < tex.height)
             {
                 float x = 0.0F;
@@ -495,8 +538,114 @@ namespace RandomlyGeneratedItems
 
             tex.SetPixels(col);
             tex.Apply();
+            */
+
+            int shape = rng.RangeInt(0, 3);
+
+            for (int y = 0; y < tex.height; y++)
+            {
+                for (int x = 0; x < tex.width; x++)
+                {
+                    float xCoord = sx + x / tex.width * scale;
+                    float yCoord = sy + y / tex.height * scale;
+                    float sample = Mathf.PerlinNoise(xCoord, yCoord);
+
+                    switch (shape)
+                    {
+                        default: // square
+                            // check if the current pixel is inside the square
+                            if (x > tex.width / 4 && x < tex.width * 3 / 4 && y > tex.height / 4 && y < tex.height * 3 / 4)
+                            {
+                                col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+
+                        case 1: // circle
+                            // check if the current pixel is inside the circle
+                            if (Mathf.Sqrt(Mathf.Pow(x - tex.width / 2, 2) + Mathf.Pow(y - tex.height / 2, 2)) < tex.width / 2)
+                            {
+                                col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+
+                        case 2: // rhombus
+                            // check if the current pixel is inside the rhombus
+                            if (Mathf.Abs(x - tex.width / 2) + Mathf.Abs(y - tex.height / 2) < tex.width / 2)
+                            {
+                                col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+                            /*
+                        case 3: // triangle
+                                // check if the current pixel is inside the triangle
+                            float halfWidth = tex.width / 2;
+                            float halfHeight = tex.height / 2;
+                            float xCoord2 = x - halfWidth;
+                            float yCoord2 = y - halfHeight;
+                            if (Mathf.Abs(xCoord2) + Mathf.Abs(yCoord2) <= halfWidth && yCoord2 <= xCoord2 && yCoord2 >= -xCoord2)
+                            {
+                                col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+
+                        case 4: // star
+                                // check if the current pixel is inside the star
+                            if (x >= tex.width / 3 && x <= tex.width * 2 / 3 && y >= tex.height / 3 && y <= tex.height * 2 / 3 && (y == tex.height / 2 || x == tex.width / 2))
+                            {
+                                col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+
+                        case 5: // crescent
+                                // check if the current pixel is inside the crescent
+                            if (x > tex.width / 4 && x < tex.width * 3 / 4 && y > tex.height / 4 && y < tex.height * 3 / 4)
+                            {
+                                float distanceFromCenter = Mathf.Sqrt(Mathf.Pow(x - tex.width / 2, 2) + Mathf.Pow(y - tex.height / 2, 2));
+                                if (distanceFromCenter > tex.width / 4 && distanceFromCenter < tex.width / 2)
+                                {
+                                    col[y * tex.width + x] = Color.Lerp(color, Color.black, sample);
+                                }
+                                else
+                                {
+                                    col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                                }
+                            }
+                            else
+                            {
+                                col[y * tex.width + x] = new Color(0, 0, 0, 0);
+                            }
+                            break;
+                            */
+
+                            // these aren't accurate at all lmao
+                    }
+                }
+            }
+            tex.SetPixels(col);
+            tex.Apply();
 
             Sprite icon = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+
             DontDestroyOnLoad(tex);
             DontDestroyOnLoad(icon);
 
@@ -521,8 +670,6 @@ namespace RandomlyGeneratedItems
             ItemAPI.Add(new CustomItem(itemDef, CreateItemDisplayRules()));
             myItemDefs.Add(itemDef);
             Logger.LogDebug("Generated a " + translatedTier + " item named " + itemName);
-
-            //On.RoR2.Language.GetLocalizedStringByToken += Language_GetLocalizedStringByToken;
         }
 
         private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args)
@@ -604,7 +751,7 @@ namespace RandomlyGeneratedItems
                             Debug.Log("Description: " + res.Value.description);
                             Debug.Log("=====================================");
                         } */
-
+                        /*
                         bool found = map.TryGetValue(def.nameToken, out effect);
                         if (found && effect.effectType == Effect.EffectType.OnHurt)
                         {
@@ -616,6 +763,7 @@ namespace RandomlyGeneratedItems
                                 effect.onHurtEffect(victim, sender.inventory.GetItemCount(def));
                             }
                         }
+                        */
                     }
                 }
             }
