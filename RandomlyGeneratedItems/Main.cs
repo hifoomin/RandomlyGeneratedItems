@@ -19,7 +19,7 @@ namespace RandomlyGeneratedItems
 
         public const string PluginAuthor = "HIFUPulse";
         public const string PluginName = "RandomlyGeneratedItems";
-        public const string PluginVersion = "0.0.1";
+        public const string PluginVersion = "0.0.2";
 
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
@@ -751,19 +751,20 @@ namespace RandomlyGeneratedItems
                             Debug.Log("Description: " + res.Value.description);
                             Debug.Log("=====================================");
                         } */
-                        /*
+
                         bool found = map.TryGetValue(def.nameToken, out effect);
                         if (found && effect.effectType == Effect.EffectType.OnHurt)
                         {
+                            /*
                             Debug.Log("Current Item: " + def.nameToken);
                             Debug.Log("Effect: " + effect.description);
                             Debug.Log("Conditions: " + effect.ConditionsMet(sender));
+                            */
                             if (effect.ConditionsMet(sender))
                             {
                                 effect.onHurtEffect(victim, sender.inventory.GetItemCount(def));
                             }
                         }
-                        */
                     }
                 }
             }

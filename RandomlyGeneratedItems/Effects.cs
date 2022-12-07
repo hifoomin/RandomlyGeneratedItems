@@ -418,7 +418,7 @@ namespace RandomlyGeneratedItems
 
             regenBoost = (args, stacks, body) =>
             {
-                args.regenMultAdd += statIncrease * (stackMult * stacks) * 4 * 0.01f;
+                args.regenMultAdd += statIncrease * (stackMult * stacks) * 11 * 0.01f;
             };
 
             critBoost = (args, stacks, body) =>
@@ -582,12 +582,14 @@ namespace RandomlyGeneratedItems
                 {applyBleed, $"Gain a <style=cIsDamage>{chance}%</style> chance on hit to <style=cDeath>bleed</style> a target for <style=cIsUtility>{speedOrBleed} seconds</style>."}
             };
 
-            onKillEffectMap = new() {
+            onKillEffectMap = new()
+            {
                 {projOnKill, $"On kill, fire a {projectileName} for <style=cIsDamage>{damage*2f}%</style> <style=cStack>(+{damage*stackMult*2f}% per stack)</style> <style=cIsDamage>base damage</style>."},
                 {healOnkill, $"Receive <style=cIsHealing>healing</style> equal to <style=cIsHealing>{healOrBarrier * 0.1f * 3}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.1f * 3}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon <style=cIsHealing>killing an enemy</style>"}
             };
 
-            onHealMap = new() {
+            onHealMap = new()
+            {
                 {barrier, $"Receive <style=cIsHealing>{healOrBarrier * 0.8f}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.8f}% per stack)</style> of your maximum health as <style=cIsDamage>barrier</style> upon being <style=cIsHealing>healed</style>."},
                 {bonus, $"Receive <style=cIsHealing>bonus healing</style> equal to <style=cIsHealing>{healOrBarrier * 0.1f}%</style> <style=cStack>(+{healOrBarrier * stackMult * 0.1f}% per stack)</style> of your maximum <style=cIsHealing>health</style> upon being <style=cIsHealing>healed</style>"}
             };
@@ -600,7 +602,7 @@ namespace RandomlyGeneratedItems
                 {damageBoost, $"Increase <style=cIsDamage>base damage</style> by <style=cIsDamage>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style>."},
                 {shieldBoost, $"Gain a <style=cIsHealing>shield</style> equal to <style=cIsHealing>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult}% per stack)</style> of your maximum health."},
                 {armorBoost, $"Gain <style=cIsHealing>{statIncrease * 0.8f}</style> <style=cStack>(+{statIncrease * 0.8f * stackMult} per stack)</style> <style=cIsHealing>armor</style>."},
-                {regenBoost, $"Increase <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>{statIncrease * 4}%</style> <style=cStack>(+{statIncrease * 4 * stackMult} per stack)." },
+                {regenBoost, $"Increase <style=cIsHealing>base health regeneration</style> by <style=cIsHealing>{statIncrease * 11}%</style> <style=cStack>(+{statIncrease * 11 * stackMult} per stack)." },
                 {critBoost, $"Gain <style=cIsDamage>{statIncrease}%</style> <style=cStack>(+{statIncrease * stackMult} per stack)</style> <style=cIsDamage>critical chance</style>." },
                 {secondaryCdrBoost, $"<style=cIsUtility>Reduce secondary skill cooldown</style> by <style=cIsUtility>{statIncrease * 0.7f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.7f * stackMult}% per stack)" },
                 {utilityCdrBoost, $"<style=cIsUtility>Reduce utility skill cooldown</style> by <style=cIsUtility>{statIncrease * 0.7f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.7f * stackMult}% per stack)" },
@@ -608,7 +610,8 @@ namespace RandomlyGeneratedItems
                 {allSkillCdrBoost, $"<style=cIsUtility>Reduce skill cooldowns</style> by <style=cIsUtility>{statIncrease * 0.4f * stackMult}%</style> <style=cStack>(+{statIncrease * 0.4f * stackMult}% per stack)" }
             };
 
-            onEliteMap = new() {
+            onEliteMap = new()
+            {
                 {barrierOnElite, $"On killing an <style=cIsDamage>elite</style>, gain <style=cIsDamage>{healOrBarrier * 3}%</style> <style=cStack>(+{healOrBarrier * 3 * stackMult}% per stack)</style> of your maximum health as barrier. Remove <style=cIsUtility>the maximum barrier cap</style> for 10 seconds."}
             };
 
@@ -692,12 +695,14 @@ namespace RandomlyGeneratedItems
                 applyBleed
             };
 
-            onHurtCallbackList = new() {
+            onHurtCallbackList = new()
+            {
                 retaliateProjectile,
                 speedBonus
             };
 
-            onEliteCallbackList = new() {
+            onEliteCallbackList = new()
+            {
                 barrierOnElite
             };
 
