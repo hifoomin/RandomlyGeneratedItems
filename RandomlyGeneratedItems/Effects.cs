@@ -469,7 +469,7 @@ namespace RandomlyGeneratedItems
             {
                 InflictDotInfo dotInfo = new();
                 dotInfo.dotIndex = DotController.DotIndex.Bleed;
-                dotInfo.duration = speedOrBleed * (stacks * stackMult);
+                dotInfo.duration = speedOrBleed * (stacks * stackMult) * info.procCoefficient;
                 dotInfo.totalDamage = info.damage;
                 dotInfo.victimObject = victim;
 
