@@ -1,0 +1,10 @@
+{
+  "name": "RandomlyGeneratedItems",
+  "version_number": "0.0.4",
+  "website_url": "https://github.com/hifoomin/RandomlyGeneratedItems",
+  "description": "Adds a configurable amount of randomly generated items with randomly generated names, icons and models. Can be networked by setting seed to be the same across everyone. Probably really unbalanced but funny!",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2102",
+    "tristanmcpherson-R2API-4.4.1"
+  ]
+}

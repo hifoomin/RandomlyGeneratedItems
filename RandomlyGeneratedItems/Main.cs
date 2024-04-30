@@ -19,7 +19,7 @@ namespace RandomlyGeneratedItems
 
         public const string PluginAuthor = "HIFUPulse";
         public const string PluginName = "RandomlyGeneratedItems";
-        public const string PluginVersion = "0.0.3";
+        public const string PluginVersion = "0.0.4";
 
         public static ConfigFile RGIConfig;
         public static ManualLogSource RGILogger;
