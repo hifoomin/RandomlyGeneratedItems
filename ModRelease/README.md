@@ -3,6 +3,12 @@
 [![discord server](https://i.imgur.com/kym7QnV.png)](https://discord.gg/me7P53smzk)
 click me
 
+# 0.0.5 Patch Notes
+<details>
+
+- Updated BepInIncompatibility
+</details>
+
 # 0.0.4 Patch Notes
 <details>
 

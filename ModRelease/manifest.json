@@ -1,6 +1,6 @@
 {
   "name": "RandomlyGeneratedItems",
-  "version_number": "0.0.4",
+  "version_number": "0.0.5",
   "website_url": "https://github.com/hifoomin/RandomlyGeneratedItems",
   "description": "Adds a configurable amount of randomly generated items with randomly generated names, icons and models. Can be networked by setting seed to be the same across everyone. Probably really unbalanced but funny!",
   "dependencies": [
